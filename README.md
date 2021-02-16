@@ -3,8 +3,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 After you have navigated to the directory you wish to clone this project to, type the following git command in the command line:
 
-```
+```bash
 git clone https://github.com/movo608/ane-collection.git
+```
+
+The next step is to install the dependencies present in package.json.
+
+```bash
+npx install --save
+# or
+npm install --save
 ```
 
 Afterwards, run the development server:

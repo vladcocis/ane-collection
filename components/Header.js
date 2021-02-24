@@ -1,30 +1,29 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import React from "react"
+import clsx from "clsx"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import Drawer from "@material-ui/core/Drawer"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import List from "@material-ui/core/List"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Typography from "@material-ui/core/Typography"
+import Divider from "@material-ui/core/Divider"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
 import _ from 'lodash'
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
 import BrushIcon from '@material-ui/icons/Brush'
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter'
-import PhoneIcon from '@material-ui/icons/Phone';
+import PhoneIcon from '@material-ui/icons/Phone'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import { useRouter } from 'next/router'
 
 const drawerWidth = 200;
 
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
-        })
+        }),
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -56,14 +55,15 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
     },
     drawerOpen: {
         width: drawerWidth,
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
-        })
+        }),
+        backgroundColor: '#faf0f2'
     },
     drawerClose: {
         transition: theme.transitions.create("width", {
@@ -74,7 +74,8 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up("sm")]: {
             width: theme.spacing(9) + 1
-        }
+        },
+        backgroundColor: '#faf0f2'
     },
     toolbar: {
         display: "flex",
@@ -87,24 +88,34 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3)
+    },
+    navList: {
+        marginLeft: theme.spacing(1)
+    },
+    iconFill_black: {
+        fill: '#000'
     }
 }));
 
 const navLinks = [
-    { label: 'Home', url: '/', icon: <HomeIcon />, isSecured: false },
-    { label: 'About', url: '/about', icon: <InfoIcon />, isSecured: false },
-    { label: 'Handmade', url: '/handmade', icon: <BrushIcon />, isSecured: false },
-    { label: 'Manufactured', url: '/manufactured', icon: <BusinessCenterIcon />, isSecured: false },
-    { label: 'Contact', url: '/contact', icon: <PhoneIcon />, isSecured: false },
-    { label: 'Admin', url: '/admin', icon: <SettingsApplicationsIcon />, isSecured: true, requiresAdmin: true },
-    { label: 'Account', url: '/account', icon: <AccountCircleIcon />, isSecured: true },
+    { label: 'Home', url: '/', icon: <HomeIcon style={{ fill: '#000' }} />, isSecured: false },
+    { label: 'About', url: '/about', icon: <InfoIcon style={{ fill: '#000' }} />, isSecured: false },
+    { label: 'Handmade', url: '/handmade', icon: <BrushIcon style={{ fill: '#000' }} />, isSecured: false },
+    { label: 'Manufactured', url: '/manufactured', icon: <BusinessCenterIcon style={{ fill: '#000' }} />, isSecured: false },
+    { label: 'Contact', url: '/contact', icon: <PhoneIcon style={{ fill: '#000' }} />, isSecured: false },
+    { label: 'Admin', url: '/admin', icon: <SettingsApplicationsIcon style={{ fill: '#000' }} />, isSecured: true, requiresAdmin: true },
+    { label: 'Account', url: '/account', icon: <AccountCircleIcon style={{ fill: '#000' }} />, isSecured: true },
 ]
 
 const NavLinks = ({ navLinks }) => {
+    const router = useRouter()
+
     return _.map(navLinks, ({ label, url, icon, isSecured, requiresAdmin }) => {
         if (!isSecured) {
             return (
-                <ListItem button key={label}>
+                <ListItem button key={label} onClick={() => {
+                    router.replace(url)
+                }}>
                     <ListItemIcon>
                         {icon}
                     </ListItemIcon>
@@ -116,10 +127,14 @@ const NavLinks = ({ navLinks }) => {
 }
 
 const RestrictedLinks = ({ navLinks }) => {
+    const router = useRouter()
+
     return _.map(navLinks, ({ label, url, icon, isSecured, requiresAdmin }) => {
         if (isSecured) {
             return (
-                <ListItem button key={label}>
+                <ListItem button key={label} onClick={() => {
+                    router.replace(url)
+                }}>
                     <ListItemIcon>
                         {icon}
                     </ListItemIcon>
@@ -130,7 +145,7 @@ const RestrictedLinks = ({ navLinks }) => {
     })
 }
 
-const Header = () => {
+const Header = ({ children }) => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -166,7 +181,7 @@ const Header = () => {
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Ane Collections
-          </Typography>
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -185,52 +200,25 @@ const Header = () => {
                 <div className={classes.toolbar}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "rtl" ? (
-                            <ChevronRightIcon />
+                            <ChevronRightIcon style={{ fill: '#000' }} />
                         ) : (
-                            <ChevronLeftIcon />
+                            <ChevronLeftIcon style={{ fill: '#000' }} />
                         )}
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
+                <List className={classes.navList}>
                     <NavLinks navLinks={navLinks} />
                 </List>
                 <Divider />
-                <List>
+                <List className={classes.navList}>
                     <RestrictedLinks navLinks={navLinks} />
                 </List>
             </Drawer>
+
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-                    dolor purus non enim praesent elementum facilisis leo vel. Risus at
-                    ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-                    quisque non tellus. Convallis convallis tellus id interdum velit
-                    laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-                    adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-                    integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-                    eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-                    quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-                    vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-                    lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-                    faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-                    ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-                    elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-                    sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-                    mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-                    risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-                    purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-                    tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-                    morbi tristique senectus et. Adipiscing elit duis tristique
-                    sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
+                {children}
             </main>
         </div>
     );

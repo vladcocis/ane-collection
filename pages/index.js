@@ -12,14 +12,15 @@ export default function Home() {
 				console.error('Internal server error')
 			}
 
-			setData(response.data.payload)
+			setData(response.data)
 		}
 
 		fetchAppointments()
-		console.log(data)
 	}, [])
 
+	!data ? <h1>Loading...</h1> : console.log(data)
+
 	return (
-		<h1>Yes</h1>	
+		<h1>Yes</h1>
   	)
 }

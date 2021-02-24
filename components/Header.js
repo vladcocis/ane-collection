@@ -165,7 +165,7 @@ const Header = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Mini variant drawer
+                        Ane Collections
           </Typography>
                 </Toolbar>
             </AppBar>

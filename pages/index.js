@@ -18,7 +18,7 @@ export default function Home() {
 		fetchAppointments()
 	}, [])
 
-	!data ? <h1>Loading...</h1> : console.log(data)
+	!data && <h1>Loading...</h1>
 
 	return (
 		<h1>Yes</h1>

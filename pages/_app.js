@@ -1,7 +1,10 @@
 import '../styles/globals.css'
 import '../components/FloatingActionButtons/FloatingActionButton.css'
+<<<<<<< Updated upstream
 import '../components/Footer.css'
 
+=======
+>>>>>>> Stashed changes
 import Layout from '../components/Layout'
 import { Theme } from '../components/Theme'
 import { ThemeProvider } from '@material-ui/styles'

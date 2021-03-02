@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Header from '../components/Header'
-import Navbar from '../components/Navbar/Navbar'
 import FloatingActionButton from './FloatingActionButtons/FloatingActionButton'
 import Footer from'../components/Footer'
 

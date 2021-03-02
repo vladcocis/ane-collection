@@ -12,9 +12,11 @@ const Layout = ({ children }) => {
 
             <FloatingActionButton />
 
-            {/*<Header> */}
-            {children}
-            {/*</Header>*/}
+            <Navbar />
+
+            <div className="main">
+                {children}
+            </div>
         </>
     )
 }

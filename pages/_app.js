@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import '../components/FloatingActionButtons/FloatingActionButton.css'
-import '../components/Navbar/Navbar.css'
+
 import Layout from '../components/Layout'
 import { Theme } from '../components/Theme'
 import { ThemeProvider } from '@material-ui/styles'

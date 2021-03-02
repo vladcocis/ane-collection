@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import '../components/FloatingActionButtons/FloatingActionButton.css'
+import '../components/Footer.css'
 
 import Layout from '../components/Layout'
 import { Theme } from '../components/Theme'

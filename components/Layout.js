@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     return (
         <>
             <Head>
-                <title>Cykaaaaa</title>
+                <title>Ane Collection</title>
             </Head>
 
             <FloatingActionButton />

@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative'
 	},
 	carouselContent: {
-		backgroundColor: 'darkred',
+		backgroundColor: 'lightpink',
 		height: '100%',
 		position: 'relative',
 		cursor: 'pointer',
@@ -114,47 +114,32 @@ const useStyles = makeStyles((theme) => ({
 
 const items = [
 	{
-		Name: "Electronics",
-		Caption: "Electrify your friends!",
+		Name: "Exquisite jewellery",
+		Caption: "Shop our finest pieces by browsing the handmade and manufactured catalogues",
 		contentPosition: "left",
 		Items: [
 			{
-				Name: "Macbook Pro",
-				Image: "https://source.unsplash.com/featured/?macbook"
+				Name: "Handmade",
+				Image: "https://source.unsplash.com/0vwTn3twzJY"
 			},
 			{
-				Name: "iPhone",
-				Image: "https://source.unsplash.com/featured/?iphone"
+				Name: "Manufactured",
+				Image: "https://source.unsplash.com/uf_IDewI6iQ"
 			}
 		]
 	},
 	{
-		Name: "Home Appliances",
-		Caption: "Say no to manual home labour!",
-		contentPosition: "middle",
-		Items: [
-			{
-				Name: "Washing Machine WX9102",
-				Image: "https://source.unsplash.com/featured/?washingmachine"
-			},
-			{
-				Name: "Learus Vacuum Cleaner",
-				Image: "https://source.unsplash.com/featured/?vacuum,cleaner"
-			}
-		]
-	},
-	{
-		Name: "Decoratives",
-		Caption: "Give style and color to your living room!",
+		Name: "Get to know us",
+		Caption: "Have a look at our story or contact us about more info",
 		contentPosition: "right",
 		Items: [
 			{
-				Name: "Living Room Lamp",
-				Image: "https://source.unsplash.com/featured/?lamp"
+				Name: "About us",
+				Image: "https://source.unsplash.com/Oalh2MojUuk"
 			},
 			{
-				Name: "Floral Vase",
-				Image: "https://source.unsplash.com/featured/?vase"
+				Name: "Contact us",
+				Image: "https://source.unsplash.com/q3QPw37J6Xs"
 			}
 		]
 	}

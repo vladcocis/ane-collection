@@ -8,7 +8,9 @@ const Layout = ({ children }) => {
             <Head>
                 <title>Cykaaaaa</title>
             </Head>
+
             <FloatingActionButton />
+            
             <Header>
                 {children}
             </Header>

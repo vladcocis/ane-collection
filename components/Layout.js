@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import FloatingActionButton from './FloatingActionButtons/FloatingActionButton'
 import Footer from'../components/Footer'
+import Navbar from '../components/Navbar/Navbar'
 
 const Layout = ({ children }) => {
     return (
@@ -16,6 +17,7 @@ const Layout = ({ children }) => {
             <div className="main">
                 {children}
             </div>
+            
             <Footer/>
         </>
     )

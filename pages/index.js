@@ -84,7 +84,8 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'capitalize',
 		transition: '200ms',
 		[theme.breakpoints.down('sm')]: {
-			fontSize: 14
+			fontSize: 11,
+			marginTop: theme.spacing(4)
 		}
 	},
 	mediaCaption: {
@@ -104,6 +105,11 @@ const useStyles = makeStyles((theme) => ({
 
 		'&:hover': {
 			opacity: .8
+		},
+
+		[theme.breakpoints.down('sm')]: {
+			fontSize: 10,
+			padding: 8
 		}
 	}
 }))
@@ -241,10 +247,10 @@ const Home = () => {
 				<Grid className={classes.imageGrid} item xs={6}></Grid>
 
 				<Grid className={classes.gridTextContent} item xs={6} elevation={12} component={Paper}>
-					<Typography component="h1" variant="h1">
+					<Typography component="h1" variant="h5">
 						CINE ARE NOROC ARE
 					</Typography>
-					<Typography component="h1" variant="h1">
+					<Typography component="h1" variant="h5">
 						Dar nu uita ca caruta nu e ca mertanu.
 					</Typography>
 				</Grid>

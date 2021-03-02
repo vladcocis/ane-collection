@@ -57,17 +57,11 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(4),
 		color: '#fff',
 		transition: '300ms',
-		[theme.breakpoints.down('sm')]: {
-			display: 'none'
-		},
 	},
 	carouselTitle: {
 		fontSize: 60,
 		fontWeight: '500',
 		textOverflow: 'ellipsis',
-		[theme.breakpoints.down('sm')]: {
-			display: 'none'
-		},
 	},
 	carouselCaption: {
 		marginTop: '10px',
@@ -172,13 +166,14 @@ const Item = (props) => {
 	const contentPosition = props.contentPosition ? props.contentPosition : "left"
 	const totalItems = props.length ? props.length : 3;
 	const mediaLength = totalItems - 1;
-	
+
 	const [displayTitle, setDisplayTitle] = React.useState(true)
 
 	React.useEffect(() => {
 		const setResponsiveness = () => {
 			return window.innerWidth < 900 ? setDisplayTitle(false) : setDisplayTitle(true)
 		};
+		console.log(window.innerWidth < 900, displayTitle)
 
 		setResponsiveness();
 
@@ -186,50 +181,73 @@ const Item = (props) => {
 	}, []);
 
 	let items = [];
-	const content = (
-		<Grid item xs={12 / totalItems} key="content" className={classes.carouselItemContainer}>
-			<CardContent className={classes.carouselContent}>
-				{displayTitle && <Typography className={classes.carouselTitle}> {props.item.Name} </Typography>}
 
-				<Typography className={classes.carouselCaption}>
-					{props.item.Caption}
-				</Typography>
+	if (displayTitle) {
+		for (let i = 0; i < mediaLength; i++) {
+			const item = props.item.Items[i];
 
-				<Button variant="outlined" className={classes.carouselButton}>
-					View Now
-                </Button>
-			</CardContent>
-		</Grid>
-	)
+			const media = (
+				<Grid item xs={12 / totalItems} key={item.Name}>
+					<CardMedia
+						className={classes.carouselItemMedia}
+						image={item.Image}
+						title={item.Name}
+					>
+						<Typography className={classes.mediaCaption}>
+							{item.Name}
+						</Typography>
+					</CardMedia>
 
+				</Grid>
+			)
 
-	for (let i = 0; i < mediaLength; i++) {
-		const item = props.item.Items[i];
+			items.push(media);
+		}
 
-		const media = (
-			<Grid item xs={12 / totalItems} key={item.Name}>
-				<CardMedia
-					className={classes.carouselItemMedia}
-					image={item.Image}
-					title={item.Name}
-				>
-					<Typography className={classes.mediaCaption}>
-						{item.Name}
+		const content = (
+			<Grid item xs={12 / totalItems} key="content" className={classes.carouselItemContainer}>
+				<CardContent className={classes.carouselContent}>
+					<Typography className={classes.carouselTitle}> {props.item.Name} </Typography>
+
+					<Typography className={classes.carouselCaption}>
+						{props.item.Caption}
 					</Typography>
-				</CardMedia>
 
+					<Button variant="outlined" className={classes.carouselButton}>
+						View Now
+                </Button>
+				</CardContent>
 			</Grid>
 		)
 
-		items.push(media);
-	}
+		if (contentPosition === "left") {
+			items.unshift(content);
+		} else if (contentPosition === "right") {
+			items.push(content);
+		} else if (contentPosition === "middle") {
+			items.splice(items.length / 2, 0, content);
+		}
+	} else {
+		for (let i = 0; i < mediaLength; i++) {
+			const item = props.item.Items[i];
 
-	if (contentPosition === "left") {
-		items.unshift(content);
-	} else if (contentPosition === "right") {
-		items.push(content);
-	} else if (contentPosition === "middle") {
-		items.splice(items.length / 2, 0, content);
+			const media = (
+				<Grid item xs={6} key={item.Name}>
+					<CardMedia
+						className={classes.carouselItemMedia}
+						image={item.Image}
+						title={item.Name}
+					>
+						<Typography className={classes.mediaCaption}>
+							{item.Name}
+						</Typography>
+					</CardMedia>
+
+				</Grid>
+			)
+
+			items.push(media);
+		}
 	}
 
 	return (

@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Paper from '@material-ui/core/Paper'
 import Carousel from 'react-material-ui-carousel'
 import _ from 'lodash'
+import React from 'react'
 
 import {
 	Card,
@@ -56,20 +57,23 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(4),
 		color: '#fff',
 		transition: '300ms',
+		[theme.breakpoints.down('sm')]: {
+			display: 'none'
+		},
 	},
 	carouselTitle: {
 		fontSize: 60,
 		fontWeight: '500',
 		textOverflow: 'ellipsis',
 		[theme.breakpoints.down('sm')]: {
-			fontSize: 20
-		}
+			display: 'none'
+		},
 	},
 	carouselCaption: {
 		marginTop: '10px',
 		fontSize: 30,
 		[theme.breakpoints.down('sm')]: {
-			fontSize: 16
+			display: 'none'
 		}
 	},
 	carouselButton: {
@@ -168,14 +172,24 @@ const Item = (props) => {
 	const contentPosition = props.contentPosition ? props.contentPosition : "left"
 	const totalItems = props.length ? props.length : 3;
 	const mediaLength = totalItems - 1;
+	
+	const [displayTitle, setDisplayTitle] = React.useState(true)
+
+	React.useEffect(() => {
+		const setResponsiveness = () => {
+			return window.innerWidth < 900 ? setDisplayTitle(false) : setDisplayTitle(true)
+		};
+
+		setResponsiveness();
+
+		window.addEventListener("resize", () => setResponsiveness());
+	}, []);
 
 	let items = [];
 	const content = (
 		<Grid item xs={12 / totalItems} key="content" className={classes.carouselItemContainer}>
 			<CardContent className={classes.carouselContent}>
-				<Typography className={classes.carouselTitle}>
-					{props.item.Name}
-				</Typography>
+				{displayTitle && <Typography className={classes.carouselTitle}> {props.item.Name} </Typography>}
 
 				<Typography className={classes.carouselCaption}>
 					{props.item.Caption}
@@ -235,7 +249,6 @@ const Home = () => {
 			<CssBaseline />
 
 			<Carousel className={classes.carouselContainer}
-				navButtonsAlwaysInvisible={true}
 				indicators={false}
 			>
 				{_.map(items, (it, index) => {

@@ -17,6 +17,7 @@
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-material-ui-carousel": "^2.2.1",
     "serverless-mysql": "^1.5.4"
   }
 }

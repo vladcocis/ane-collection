@@ -173,13 +173,13 @@ export default function Header() {
 	);
 
 	const getMenuButtons = () => {
-		return navLinks.map(({ label, href }) => {
+		return navLinks.map(({ label, url }) => {
 			return (
 				<Button
 					{...{
 						key: label,
 						color: "inherit",
-						to: href,
+						href: url,
 						component: RouterLink,
 						className: menuButton,
 					}}

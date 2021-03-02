@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
 
             <Navbar />
 
-            <div className="main">
+            <div className="main" style={{marginBottom: '30px'}}>
                 {children}
             </div>
             

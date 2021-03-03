@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		position: 'flex',
 		'&:hover': {
 			backgroundColor: '#fde8ff'
-		}	
+		}
 	},
 }))
 
@@ -28,18 +28,19 @@ export default function FloatingActionButtons() {
 	return (
 		<div className='root'>
 			<div className='icon__container'>
-				<Fab className={classes.fabColor1} color="primary" aria-label="call">
-					<a className={classes.fabLink} href="tel:+447470718754"><PhoneIcon /></a>
+				<Fab className={classes.fabColor1} color="primary" aria-label="call" href="tel:+447470718754">
+					<PhoneIcon />
+				</Fab>
+			</div>
+
+			<div className='icon__container'>
+				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
+					<FacebookIcon />
 				</Fab>
 			</div>
 			<div className='icon__container'>
-				<Fab className={classes.fabColor2} aria-label="facebook">
-					<a className={classes.fabLink} href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'><FacebookIcon /></a>
-				</Fab>
-			</div>
-			<div className='icon__container'>
-				<Fab className={classes.fabColor2} aria-label="instagram">
-					<a className={classes.fabLink} href="https://www.instagram.com/roxanaaapop/" target="_blank" rel='noopener noreferrer'><InstagramIcon /></a>
+				<Fab className={classes.fabColor2} aria-label="instagram" href="https://www.instagram.com/roxanaaapop/" target="_blank" rel='noopener noreferrer'>
+					<InstagramIcon />
 				</Fab>
 			</div>
 		</div>

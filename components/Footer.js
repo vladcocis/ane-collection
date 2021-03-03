@@ -16,7 +16,7 @@ function Footer() {
               Ane Collections
             </Link>
           </div>
-          <small className='website-rights'>bellacasa © 2020</small>
+          <div className='website-rights'>© 2021 Ane Collections</div>
           <div className='social-icons'>
             <Link
               className='social-icon-link facebook'

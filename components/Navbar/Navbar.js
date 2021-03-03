@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary,
 		paddingRight: "79px",
 		paddingLeft: "118px",
-		"@media (max-width: 1257px)": {
+		"@media (max-width: 1300px)": {
 			paddingLeft: 0,
 		},
 	},
@@ -168,7 +168,7 @@ export default function Header() {
 
 	const Logo = (
 		<Typography variant="h6" component="h1" className={logo}>
-			Ane Collection
+			Ane Collections
 		</Typography>
 	);
 

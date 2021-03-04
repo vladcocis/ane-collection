@@ -227,7 +227,6 @@ const Item = (props) => {
 							{item.Name}
 						</Typography>
 					</CardMedia>
-
 				</Grid>
 			)
 

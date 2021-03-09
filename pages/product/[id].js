@@ -4,8 +4,7 @@ All products are listed here
 
 import React from 'react'
 import Head from 'next/head'
-import { useEffect, useState} from 'react';
-
+import {useEffect, useState} from 'react';
 
 
 import Product_info from '../../components/Product_info'
@@ -20,23 +19,21 @@ const data_product = JSON.parse("{\"id\":\"0\", \"product_name\":\"nyan\", \"cat
 //const data_product_images = JSON.parse("");
 
 
-const ProductId =() => {
+const ProductId = () => {
 
 
-
-return(
-
+    return (
 
 
-/*
-Products must be pulled from the product-table database and sent to the Products_list_card.
-*/
-<div>
-<Product_info product={data_product} key={data_product.id}/>
+        /*
+        Products must be pulled from the product-table database and sent to the Products_list_card.
+        */
+        <div>
+            <Product_info product={data_product} key={data_product.id}/>
 
-</div>
+        </div>
 
-   )
+    )
 
 
 }

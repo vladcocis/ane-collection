@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {Button, Grid, TextField, useMediaQuery, useTheme} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -57,7 +56,7 @@ const ContactUs = () => {
     const [emailHelper, setEmailHelper] = useState('');
     const [messageHelper, setMessageHelper] = useState('');
 
-    const matchesXs= useMediaQuery(theme.breakpoints.down('xs'));
+    const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesXss = useMediaQuery('max-width: 350px');
 
     const valueChangeHandler = (event) => {
@@ -132,7 +131,7 @@ const ContactUs = () => {
                                 <CallIcon color={"primary"} style={{marginRight: '0.35em'}}/>
                             </Grid>
                             <Grid item>
-                                <Typography style={{fontSize: '1rem'}} variant={'body2'} >
+                                <Typography style={{fontSize: '1rem'}} variant={'body2'}>
                                     <a style={{textDecoration: 'none', color: 'inherit'}} href="tel:(+40) 358-9320">(+40)
                                         358-9320</a>
                                 </Typography>
@@ -223,13 +222,13 @@ const ContactUs = () => {
                     </Grid>
 
                     <Grid item>
-                        <Button style={ { backgroundColor: '#fce4ec'}}
-                            onClick={() => setOpen(true)}
-                            variant={'contained'}
-                            disabled={name.trim().length === 0 || email.trim().length === 0 || phone.trim().length === 0 || message.trim().length === 0}
-                            className={classes.sendButton}>
+                        <Button style={{backgroundColor: '#fce4ec'}}
+                                onClick={() => setOpen(true)}
+                                variant={'contained'}
+                                disabled={name.trim().length === 0 || email.trim().length === 0 || phone.trim().length === 0 || message.trim().length === 0}
+                                className={classes.sendButton}>
                             Send Message
-                            <SendIcon style={{ marginLeft: '1em'}}/>
+                            <SendIcon style={{marginLeft: '1em'}}/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -313,23 +312,26 @@ const ContactUs = () => {
                                         <Grid item>
                                             <Grid container
                                                   alignItems={'center'}
-                                                  direction={matchesXs ? 'column': 'row'}
+                                                  direction={matchesXs ? 'column' : 'row'}
                                                   style={{marginTop: '1em', marginBottom: '1em'}}>
 
-                                                <Grid item style={{marginRight: '1em', marginBottom: matchesXs ? '.5em': '0'}}>
+                                                <Grid item style={{
+                                                    marginRight: '1em',
+                                                    marginBottom: matchesXs ? '.5em' : '0'
+                                                }}>
                                                     <Button color={'primary'} onClick={() => setOpen(false)}>
                                                         cancel
                                                     </Button>
                                                 </Grid>
                                                 <Grid item>
-                                                    <Button style={ { backgroundColor: '#fce4ec'}}
-                                                        onClick={() => setOpen(true)}
-                                                        variant={'contained'}
-                                                        disabled={name.trim().length === 0 || email.trim().length === 0 || phone.trim().length === 0 || message.trim().length === 0}
-                                                        className={classes.sendButton}>
+                                                    <Button style={{backgroundColor: '#fce4ec'}}
+                                                            onClick={() => setOpen(true)}
+                                                            variant={'contained'}
+                                                            disabled={name.trim().length === 0 || email.trim().length === 0 || phone.trim().length === 0 || message.trim().length === 0}
+                                                            className={classes.sendButton}>
                                                         Send Message
-                                                        <SendIcon style={ { marginLeft: '1em'}}
-                                                    />
+                                                        <SendIcon style={{marginLeft: '1em'}}
+                                                        />
                                                     </Button>
                                                 </Grid>
                                             </Grid>

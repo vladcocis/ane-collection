@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react';
 import _ from 'lodash'
-
+import ProductCardImage from './ProductCardImage'
 
 import {
   Card,
@@ -24,8 +23,6 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-
-
   },
   media: {
     height: 350,
@@ -83,12 +80,10 @@ const Products_list_card = ({ products }) => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log('Free pizza!');
-    console.log(event);
   }
 
   return (
-    <Container style={{marginTop: '5em'}}>
+    <Container style={{ marginTop: '5em' }}>
 
       <Grid container spacing={2}>
 
@@ -98,17 +93,9 @@ const Products_list_card = ({ products }) => {
               <Link href={'/product/' + it.id} >
                 <Card className={classes.root}>
                   <CardHeader className={classes.header}
-
-
-                    title={it.product_name}
-
-                  />
-                  <CardMedia
-                    className={classes.media}
-                    //image={it.showroomImg}
-                    image={`https://miro.medium.com/max/2560/1*DurBxFRmQ_bCn8ustfKz7g.jpeg`}
                     title={it.product_name}
                   />
+                  <ProductCardImage productId={it.id} />
                   <CardContent className={classes.sub}>
                     <Typography className={classes.sub} variant="body2" color="textSecondary" component="p">
                       {it.category_id}

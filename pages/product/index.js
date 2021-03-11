@@ -21,8 +21,6 @@ class ProductIndex extends React.Component {
    componentDidMount = async () => {
       const response = await axios.get(`/api/products`)
 
-      console.log(response)
-
       this.setState({ products: response.data.payload })
    }
 

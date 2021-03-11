@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Products_list_card from '../../components/Products/Products_list_card'
 import _ from 'lodash'
 
-class ProductIndex extends React.Component {
+/*class ProductIndex extends React.Component {
    constructor(props) {
       super(props)
 
@@ -31,10 +31,10 @@ class ProductIndex extends React.Component {
          </div>
       )
    }
-}
+}*/
 
 
-/*const ProductIndex = () => {
+const ProductIndex = () => {
    const [products, setProducts] = React.useState({});
 
    products ?? <h2>Loading...</h2>
@@ -58,5 +58,5 @@ class ProductIndex extends React.Component {
    )
 
 
-}*/
+}
 export default ProductIndex

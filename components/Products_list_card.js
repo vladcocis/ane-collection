@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 const Products_list_card = ({ product }) => {
 
 
+
      const classes = useStyles();
      const [expanded, setExpanded] = React.useState(false);
 
@@ -95,13 +96,16 @@ const Products_list_card = ({ product }) => {
      }
 
 
-     return(
 
+
+
+     return(
+<div>
        <Container >
 
+<Grid container justify="space-between" spacing={0}>
 
-           <Grid item xs={12} md={4}>
-
+           <Grid  item xs={12} md={3}>
    <Link  href={'/product/'+product.id } >
      <Card className={classes.root}>
          <CardHeader className={classes.header}
@@ -113,7 +117,7 @@ const Products_list_card = ({ product }) => {
          <CardMedia
            className={classes.media}
            image={product.showroomImg}
-           title="Paella dish"
+           title={product.product_name}
          />
          <CardContent className={classes.sub}>
            <Typography  className={classes.sub} variant="body2" color="textSecondary" component="p">
@@ -134,12 +138,90 @@ const Products_list_card = ({ product }) => {
 
        </Card>
 </Link>
+</Grid>
+
+
+		           <Grid  item xs={12} md={3}>
+   <Link  href={'/product/1' } >
+     <Card className={classes.root}>
+         <CardHeader className={classes.header}
+
+
+           title={product.product_name}
+
+         />
+         <CardMedia
+           className={classes.media}
+           image='https://cdn-ss.akinon.net/products/2021/02/22/319814/b0f235b0-3c77-4165-b110-c675d8d613b2_size600x600_quality100_cropCenter.jpg'
+           title="Nike1"
+         />
+         <CardContent className={classes.sub}>
+           <Typography  className={classes.sub} variant="body2" color="textSecondary" component="p">
+             {product.category_id}
+           </Typography>
+          {product.product_desc}
+         </CardContent>
+         <CardActions disableSpacing>
+           <IconButton aria-label="add to favorites">
+             <FavoriteIcon />
+           </IconButton>
+           <IconButton className={classes.shop} onClick={handleClick} aria-label="add to shopping cart">
+       <AddShoppingCartIcon onClick={handleClick} />
+       </IconButton>
+
+
+         </CardActions>
+
+       </Card>
+</Link>
+</Grid>
+
+
+
+
+           <Grid  item xs={12} md={3}>
+   <Link  href={'/product/2' } >
+     <Card className={classes.root}>
+         <CardHeader className={classes.header}
+
+
+           title={product.product_name}
+
+         />
+         <CardMedia
+           className={classes.media}
+           image={'https://static.nike.com/a/images/w_960,c_limit,f_auto/24b34bc0-f586-406d-9fc4-878fdd4e0a9b/blazer-mid-x-readymade-white-lansman-tarihi.png'}
+           title="Nike2"
+         />
+         <CardContent className={classes.sub}>
+           <Typography  className={classes.sub} variant="body2" color="textSecondary" component="p">
+             {product.category_id}
+           </Typography>
+          {product.product_desc}
+         </CardContent>
+         <CardActions disableSpacing>
+           <IconButton aria-label="add to favorites">
+             <FavoriteIcon />
+           </IconButton>
+           <IconButton className={classes.shop} onClick={handleClick} aria-label="add to shopping cart">
+       <AddShoppingCartIcon onClick={handleClick} />
+       </IconButton>
+
+
+         </CardActions>
+
+       </Card>
+</Link>
+</Grid>
+
 
 
 </Grid>
-</Container>
-     )
 
+</Container>
+
+</div>
+     )
 
 
 

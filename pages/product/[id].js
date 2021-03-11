@@ -4,27 +4,27 @@ All products are listed here
 
 import React from 'react'
 import Head from 'next/head'
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import Product_info from '../../components/Product_info'
+import Product_info from '../../components/Products/Product_info'
 
-import Product_comment from '../../components/Product_comment'
+import Product_comment from '../../components/Products/Product_comment'
 
 
 
 const classesr = makeStyles({
- root: {
-   marginTop: "7rem",
+  root: {
+    marginTop: "7rem",
 
 
 
- },
+  },
 
- comments: {
- marginTop: "50px",
+  comments: {
+    marginTop: "50px",
 
- },
+  },
 });
 
 
@@ -38,28 +38,28 @@ const data_comments = JSON.parse("{\"id\":\"0\",\"p_id\":\"0\",\"name\": \"AVRİ
 //const data_product_images = JSON.parse("");
 
 
-const ProductId =() => {
+const ProductId = () => {
 
-const classes = classesr();
+  const classes = classesr();
 
-return(
-
-
-
-/*
-Products must be pulled from the product-table database and sent to the Products_list_card.
-*/
-<div className={classes.root}>
-
-<Product_info className={classes.root} product={data_product} key={data_product.id}/>
+  return (
 
 
-<Product_comment  className={classes.comments} comments={data_comments}/>
+
+    /*
+    Products must be pulled from the product-table database and sent to the Products_list_card.
+    */
+    <div className={classes.root}>
+
+      <Product_info className={classes.root} product={data_product} key={data_product.id} />
 
 
-</div>
+      <Product_comment className={classes.comments} comments={data_comments} />
 
-   )
+
+    </div>
+
+  )
 
 
 }

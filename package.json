@@ -15,12 +15,14 @@
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
     "next": "10.0.6",
+    "next-iron-session": "^4.1.12",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.4",
     "react-material-ui-carousel": "^2.2.1",
     "react-toastify": "^7.0.3",
-    "serverless-mysql": "^1.5.4"
+    "serverless-mysql": "^1.5.4",
+    "swr": "^0.5.3"
   }
 }

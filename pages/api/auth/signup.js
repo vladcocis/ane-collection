@@ -6,16 +6,22 @@ export default async (req, res) => {
         return res.status(403).json({ status: 403, payload: 'err_forbidden' })
     }
 
-    const { firstName, lastName, email, password } = req.body
+    const { firstName, lastName, username, email, password } = req.body
 
-    console.log(firstName, lastName, email, password)
+    console.log(firstName, lastName,username, email, password)
 
     const email_challenge = await executeQuery({
         query: `SELECT email FROM user WHERE email='${email}'`
     })
+    const username_challenge = await executeQuery({
+        query: `SELECT username FROM user WHERE username='${username}'`
+    })
 
     if (email_challenge.length) {
-        return res.status(200).json({ status: 409, payload: 'err_email_exists' })
+        return res.status(200).json({ status: 409, payload: 'Email already in use' })
+    }
+    else if (username_challenge.length) {
+        return res.status(200).json({ status: 409, payload: 'Username already in use' })
     }
 
     genSalt(12, function(err, salt) {
@@ -23,7 +29,7 @@ export default async (req, res) => {
             hash(password, salt, async function(err, hash) {
                 if (!err) {
                     const response = await executeQuery({
-                        query: `INSERT INTO user (id, name, username, email, password, is_admin) VALUES (null, '${firstName} ${lastName}', 'null', '${email}', '${hash}', '0')`
+                        query: `INSERT INTO user (id, name, username, email, password, is_admin) VALUES (null, '${firstName} ${lastName}', '${username}', '${email}', '${hash}', '0')`
                     })
 
                     console.log(response)
@@ -34,7 +40,7 @@ export default async (req, res) => {
                 }
             })
         }
-    })
+})
 
     return res.status(200).json({ payload: 'User created successfully', status: 200 })
 }

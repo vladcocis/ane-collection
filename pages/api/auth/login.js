@@ -24,10 +24,10 @@ export default withSession(async (req, res) => {
 		return res.status(403).json({ status: 403, payload: 'err_forbidden' })
 	}
 
-	const { email, password } = req.body
+	const { username, password } = req.body
 
 	const user = await executeQuery({
-		query: `SELECT * FROM user WHERE email='${email}'`
+		query: `SELECT * FROM user WHERE username='${username}'`
 	})
 
 	if (user.length === 0) {

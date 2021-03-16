@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,25 +38,91 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
 	const classes = useStyles();
 
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+    const [firstNameHelper, setFirstNameHelper] = useState('');
+	const [lastNameHelper, setLastNameHelper] = useState('');
+	const [usernameHelper, setUsernameHelper] = useState('');
+    const [emailHelper, setEmailHelper] = useState('');
+	const [passwordHelper, setPasswordHelper] = useState('');
+
 	const actionSignup = async (e) => {
 		e.preventDefault()
 
 		const body = {
 			firstName: e.currentTarget.firstName.value,
 			lastName: e.currentTarget.lastName.value,
+			username: e.currentTarget.username.value,
 			email: e.currentTarget.email.value,
 			password: e.currentTarget.password.value
 		}
 
 		// if (no errors) =>
 		const response = await axios.post('/api/auth/signup', body)
-		console.log(response)
+		alert(response.data.payload)
 	}
+
+	const valueChangeHandler = (event) => {
+        const value = event.target.value;
+        switch (event.target.name) {
+            case 'firstName': {
+                setFirstName(value);
+                if (firstName.length < 3) {
+                    setFirstNameHelper('First name must be at least 3 characters long');
+                } else {
+                    setFirstNameHelper('');
+                }
+                break;
+            }
+			case 'lastName': {
+                setLastName(value);
+                if (lastName.length < 3) {
+                    setLastNameHelper('Last name must be at least 3 characters long');
+                } else {
+                    setLastNameHelper('');
+                }
+                break;
+            }
+			case 'username': {
+                setUsername(value);
+                if (username.length < 8) {
+                    setUsernameHelper('Username must be at least 8 characters long');
+                } else {
+                    setUsernameHelper('');
+                }
+                break;
+            }
+            case 'email': {
+                setEmail(value);
+                const valid = (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/).test(value);
+                if (!valid) {
+                    setEmailHelper('Invalid Email. Format must be like :abcd@hotmail.com');
+                } else {
+                    setEmailHelper('');
+                }
+                break;
+            }
+            case 'password': {
+                setPassword(event.target.value);
+                if (password.length < 8) {
+                    setPasswordHelper('Password must be at least 8 characters long');
+                } else {
+                    setPasswordHelper('');
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
 
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
-			<div className={classes.paper}>
+			<div className={classes.paper} style={{ marginTop: '8.15em' }}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
 				</Avatar>
@@ -75,10 +141,14 @@ export default function SignUp() {
 								id="firstName"
 								label="First Name"
 								autoFocus
+								onChange={valueChangeHandler}
+								helperText={firstNameHelper}
+								error={firstNameHelper.trim().length !== 0}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
+								onChange={valueChangeHandler}
 								variant="outlined"
 								required
 								fullWidth
@@ -86,6 +156,22 @@ export default function SignUp() {
 								label="Last Name"
 								name="lastName"
 								autoComplete="lname"
+								helperText={lastNameHelper}
+								error={lastNameHelper.trim().length !== 0}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="username"
+								label="Username"
+								name="username"
+								autoComplete="username"
+								onChange={valueChangeHandler}
+								helperText={usernameHelper}
+								error={usernameHelper.trim().length !== 0}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -97,6 +183,9 @@ export default function SignUp() {
 								label="Email Address"
 								name="email"
 								autoComplete="email"
+								onChange={valueChangeHandler}
+								helperText={emailHelper}
+								error={emailHelper.trim().length !== 0}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -109,7 +198,11 @@ export default function SignUp() {
 								type="password"
 								id="password"
 								autoComplete="current-password"
+								onChange={valueChangeHandler}
+								helperText={passwordHelper}
+								error={passwordHelper.trim().length !== 0}
 							/>
+							<small>Password must be 8 characters long.</small>
 						</Grid>
 						<Grid item xs={12}>
 							<FormControlLabel
@@ -124,12 +217,13 @@ export default function SignUp() {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
+						disabled={firstNameHelper.length !== 0 || lastNameHelper.length !== 0 || usernameHelper.length !== 0 || emailHelper.length !== 0 || passwordHelper.length !== 0}
 					>
 						Sign Up
 					</Button>
 					<Grid container justify="flex-end">
 						<Grid item>
-							<Link href="/account" variant="body2">
+							<Link href="/account" variant="overline" color="textPrimary">
 								Already have an account? Sign in
 							</Link>
 						</Grid>

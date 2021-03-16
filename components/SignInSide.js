@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,28 +7,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import useUser from '../lib/useUser';
+import fetchJson from "../lib/fetchJson";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '84vh',
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -60,28 +48,60 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInSide() {
   const classes = useStyles();
 
+  const { mutateUser } = useUser({
+		redirectTo: "/profile-sg",
+		redirectIfFound: true,
+	});
+
+	const [errorMsg, setErrorMsg] = useState("");
+	const [loading, setLoading] = useState(false)
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const body = {
+			username: e.currentTarget.username.value,
+			password: e.currentTarget.password.value
+		};
+
+		try {
+			setLoading(true)
+			
+			await mutateUser(
+				fetchJson("/api/auth/login", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(body),
+				}),
+			);
+		} catch (error) {
+			console.error("An unexpected error happened:", error);
+			setErrorMsg(error.data.message);
+		}
+	}
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
+        <div style={{ marginTop: '8.15em' }} className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -110,16 +130,17 @@ export default function SignInSide() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="overline" color="textPrimary">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/signup" variant="overline" color="textPrimary">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
+            { loading ? <h1>Logging you in. Please hold.</h1> : null }
           </form>
         </div>
       </Grid>

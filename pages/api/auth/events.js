@@ -1,5 +1,5 @@
-import withSession from "../../lib/session";
-import fetchJson from "../../lib/fetchJson";
+import withSession from "../../../lib/session";
+import fetchJson from "../../../lib/fetchJson";
 
 export default withSession(async (req, res) => {
   const user = req.session.get("user");

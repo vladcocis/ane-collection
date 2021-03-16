@@ -1,25 +1,32 @@
+import axios from "axios";
 import React from "react";
 import useUser from "../lib/useUser";
-import useEvents from "../lib/useEvents";
-import Layout from "../components/Layout";
+import { useRouter } from 'next/router'
+import fetchJson from "../lib/fetchJson";
 
 const SgProfile = () => {
-  const { user } = useUser({ redirectTo: "/login" });
-  const { events, loadingEvents } = useEvents(user);
+  const { user, mutateUser } = useUser({ redirectTo: "/login" });
+  const router = useRouter()
 
-  if (!user?.isLoggedIn || loadingEvents) {
-    return <Layout>loading...</Layout>;
+  if (!user) {
+    return <h1>Loading</h1>
+  }
+
+  const actionLogout = async (e) => {
+    e.preventDefault()
+    await mutateUser(fetchJson('/api/auth/logout'))
+    router.replace('/login')
   }
 
   return (
-    <Layout>
+    <React.Fragment>
       <h1>Your GitHub profile</h1>
       <h2>
         This page uses{" "}
         <a href="https://nextjs.org/docs/basic-features/pages#static-generation-recommended">
           Static Generation (SG)
         </a>{" "}
-        and the <a href="/api/user">/api/user</a> route (using{" "}
+        and the <a href="/api/auth/user">/api/user</a> route (using{" "}
         <a href="https://github.com/zeit/swr">zeit/SWR</a>)
       </h2>
 
@@ -30,11 +37,10 @@ const SgProfile = () => {
       </p>
       <pre>{JSON.stringify(user, undefined, 2)}</pre>
 
-      <p>
-        Number of GitHub events for user: <b>{events.length}</b>, last event
-        type: <b>{events[0].type}</b>
-      </p>
-    </Layout>
+      {<img src={user.avatar_url} />}
+
+      <button onClick={actionLogout}>Logout</button>
+    </React.Fragment>
   );
 };
 

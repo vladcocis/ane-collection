@@ -1,12 +1,10 @@
-import executeQuery from '../../lib/db'
+import executeQuery from '../../../lib/db'
 
 export default async (req, res) => {
 	try {
 		const response = await executeQuery({
 			query: 'SELECT * FROM migration'
 		})
-
-		console.log(response)
 
 		return res.status(200).json({ status: 200, payload: response })
 	} catch (err) {

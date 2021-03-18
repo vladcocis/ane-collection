@@ -4,6 +4,9 @@ import Paper from '@material-ui/core/Paper'
 import Carousel from 'react-material-ui-carousel'
 import _ from 'lodash'
 import React from 'react'
+import { Link as RouterLink } from 'next/link'
+import Link from '@material-ui/core/Link'
+
 
 import {
 	Card,
@@ -120,11 +123,13 @@ const items = [
 		Items: [
 			{
 				Name: "Handmade",
-				Image: "https://source.unsplash.com/0vwTn3twzJY"
+				Image: "https://source.unsplash.com/0vwTn3twzJY",
+				link: "/handmade"
 			},
 			{
 				Name: "Manufactured",
-				Image: "https://source.unsplash.com/uf_IDewI6iQ"
+				Image: "https://source.unsplash.com/uf_IDewI6iQ",
+				link: "/products"
 			}
 		]
 	},
@@ -172,18 +177,21 @@ const Item = (props) => {
 			const item = props.item.Items[i];
 
 			const media = (
+				
 				<Grid item xs={12 / totalItems} key={item.Name}>
+					<Link underline='none' component={RouterLink} to={item.link}>
 					<CardMedia
 						className={classes.carouselItemMedia}
 						image={item.Image}
-						title={item.Name}
+						title={item.Name}	
 					>
 						<Typography className={classes.mediaCaption}>
 							{item.Name}
 						</Typography>
 					</CardMedia>
-
+					</Link>
 				</Grid>
+				
 			)
 
 			items.push(media);
@@ -263,10 +271,10 @@ const Home = () => {
 
 				<Grid className={classes.gridTextContent} item xs={6} elevation={12} component={Paper}>
 					<Typography component="h1" variant="h5">
-						CINE ARE NOROC ARE
+						PLACEHOLDER TITLE
 					</Typography>
 					<Typography component="h1" variant="h5">
-						Dar nu uita ca caruta nu e ca mertanu.
+						Placeholder text
 					</Typography>
 				</Grid>
 			</Grid>

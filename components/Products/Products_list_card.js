@@ -72,7 +72,7 @@ const Products_list_card = ({ products }) => {
         {_.map(products, (it) => {
           return (
             <Grid item xs={12} md={3} key={it.id}>
-              <Link href={"/product/" + it.id}>
+              <Link href={"/products/" + it.id}>
                 <Card className={classes.root}>
                   <CardHeader
                     className={classes.header}
@@ -86,7 +86,6 @@ const Products_list_card = ({ products }) => {
                       color="textSecondary"
                       component="p"
                     >
-                      {it.category_id}
                     </Typography>
                     {it.product_desc}
                   </CardContent>

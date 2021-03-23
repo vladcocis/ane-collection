@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 import { Grid, Button, Typography, Container, Paper } from "@material-ui/core";
 
 import MobileStepper from "@material-ui/core/MobileStepper";
@@ -47,34 +47,29 @@ const productStyle = makeStyles({
   },
 });
 
-const tutorialSteps = [
-  {
-    imgPath:
-      "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/a46742ce-8dcf-4540-ba45-7ed7b35a9a99/air-zoom-pegasus-37-premium-koşu-ayakkabısı-lRcGVd.jpg",
-  },
-  {
-    imgPath:
-      "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/fe89bbe0-c5d9-4de7-99a4-fd3845693673/air-zoom-pegasus-37-premium-koşu-ayakkabısı-lRcGVd.jpg",
-  },
-  {
-    imgPath:
-      "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/9ef5bc51-9e9f-40a7-86a4-13d746b8a11b/air-force-1-react-ayakkabısı-VF4bwV.jpg",
-  },
-  {
-    imgPath:
-      "https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_2.0/w_432,c_limit/ce13ce3b-704c-4bc7-bad2-9fc214a8079a/air-max-plus-3-ayakkabısı-br9zBx.jpg",
-  },
-  {
-    imgPath:
-      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/d02b66b7-ee6a-429a-a0e0-63c7da600c49/air-jordan-35-basketbol-ayakkabısı-bGv0b6.jpg",
-  },
-];
 
-const Product_info = ({ data_product, product_images }) => {
+var maxSteps = 0;
+const Product_info = ({ data_product}) => {
+
+  const [images, setImages] = React.useState({});
+
+      images ?? <h2>Loading...</h2>;
+
+        React.useEffect(() => {
+          async function fetchAppointments() {
+            const response = await axios.get(`/api/products/images/${data_product.id}`);
+
+            setImages(response.data.payload);
+
+          }
+
+          fetchAppointments();
+        }, []);
+
+
   const pclasses = productStyle();
-
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -84,19 +79,29 @@ const Product_info = ({ data_product, product_images }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+
+  var img = []
+
+  
+  _.map(images, (p) => {  img.push(p.img); })
+
+
+
+  maxSteps = img.length
   return (
     <Container>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <div>
+       {}
             <Paper square elevation={0}>
               <Typography></Typography>
             </Paper>
             <center>
               <img
                 className={pclasses.imgcontainer}
-                src={tutorialSteps[activeStep].imgPath}
-                alt={tutorialSteps[activeStep].label}
+                src={img[activeStep]}
+
               />
             </center>
             <MobileStepper
@@ -136,7 +141,7 @@ const Product_info = ({ data_product, product_images }) => {
         >
           <Grid item>
             <Typography variant="h4"> </Typography>
-            NIKE
+          {data_product.product_name}
             <Typography
               variant="caption"
               display="block"
@@ -147,15 +152,11 @@ const Product_info = ({ data_product, product_images }) => {
             </Typography>
           </Grid>
           <Typography variant="body2" className={pclasses.productDescription}>
-            In the ‘70s, Nike was the new shoe on the block. So new in fact, we
-            were still breaking into the basketball scene and testing prototypes
-            on the feet of our local team. Of course, the design improved over
-            the years, but the name stuck. The Nike Blazer Mid ’77
-            Vintage—classic since the beginning.
+          {data_product.product_desc}
           </Typography>
 
           <Typography variant="subtitle2" className={pclasses.price}>
-            1300 $
+            {data_product.product_price} $
           </Typography>
 
           <Button variant="contained" color="primary">

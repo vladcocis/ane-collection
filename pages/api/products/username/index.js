@@ -7,7 +7,7 @@ export default async (req, res) => {
 
   try {
     const response = await executeQuery({
-      query: `SELECT img from product_images where product_id='${id}' LIMIT 1  `,
+      query: `SELECT id, name from user`,
     });
 
     return res.status(200).json({ status: 200, payload: response });

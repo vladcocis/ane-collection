@@ -1,4 +1,7 @@
 import React from "react";
+import axios from "axios";
+import { useRouter } from 'next/router'
+import _ from "lodash";
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -31,20 +34,51 @@ const data_comments = JSON.parse(
 
 const ProductId = () => {
   const classes = classesr();
+  const router = useRouter()
+
+  const get_product_id =  router.query.id;
+  const [product, setProduct] = useState({});
+
+      product ?? <h2>Loading...</h2>;
+
+
+        useEffect(() => {
+          async function fetchAppointments() {
+            const response = await axios.get(`/api/products/`);
+
+            setProduct(response.data.payload);
+          }
+
+          fetchAppointments();
+        }, []);
 
   return (
-    /*
-    Products must be pulled from the product-table database and sent to the Products_list_card.
-    */
-    <div className={classes.root}>
-      <Product_info
-        className={classes.root}
-        product={data_product}
-        key={data_product.id}
-      />
 
-      <Product_comment className={classes.comments} comments={data_comments} />
+
+<div>
+        //{_.map(product, (p) => {  return(p.id+"-")})}
+
+        {_.map(product, (p) => {  return( get_product_id == p.id ? (
+
+          <div className={classes.root}>
+            <Product_info
+              className={classes.root}
+              data_product={p}
+              key=''
+            />
+              <Product_comment className={classes.comments} comments={get_product_id} />
+
+            </div>
+
+
+
+        ) :('')  )})}
+
+
     </div>
+
+
+
   );
 };
 

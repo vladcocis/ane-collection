@@ -1,13 +1,13 @@
 import executeQuery from "../../../../lib/db";
 
 export default async (req, res) => {
-  console.log(req.query.id);
+
 
   const { id } = req.query;
 
   try {
     const response = await executeQuery({
-      query: `SELECT img from product_images where product_id='${id}' LIMIT 1  `,
+      query: `SELECT * from product_reviews where product_id='${id}'`,
     });
 
     return res.status(200).json({ status: 200, payload: response });

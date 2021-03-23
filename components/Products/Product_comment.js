@@ -7,6 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,78 +32,78 @@ const useStyles = makeStyles((theme) => ({
 
 const Product_comment = ({ comments }) => {
   const classes = useStyles();
+
+  const [comment, setComment] = useState({});
+
+      comment ?? <h2>Loading...</h2>;
+
+
+        useEffect(() => {
+          async function fetchAppointments() {
+            const response = await axios.get(`/api/products/comments/${comments}`);
+
+            setComment(response.data.payload);
+          }
+
+          fetchAppointments();
+        }, []);
+
+
+
+        const [user, setUser] = useState({});
+
+            user ?? <h2>Loading...</h2>;
+
+
+              useEffect(() => {
+                async function fetchAppointments() {
+                  const response = await axios.get(`/api/products/username/`);
+
+                  setUser(response.data.payload);
+                }
+
+                fetchAppointments();
+              }, []);
+
+
   return (
     <div>
 
 
       <List className={classes.root}>
         <h1 className={classes.header} >Comments</h1>
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="https://isbh.tmgrup.com.tr/sbh/2014/11/17/1416219020478.png" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={comments.name}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  {comments.comment}
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </React.Fragment>
-            }
-          />
 
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Avril_Lavigne%2C_Wango_Tango_2013.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Summer BBQ"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  to Scott, Alex, Jennifer
-              </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="https://images.bursadabugun.com/haber/2018/11/02/1030630-avril-lavigne-olmedim-yasiyorum-5bdc63904aa93.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  Sandra Adams
-              </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
+
+        {_.map(comment, (c) => {  return(
+
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt="" src="https://icons-for-free.com/iconfiles/png/512/comment-131965017416332557.png" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={_.map(user, (u) => {  return(u.id==c.user_id ? ( u.name) :('') )})}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    {c.message}
+                  </Typography>
+              <p>   { "Rating: "+c.rating} </p>
+                </React.Fragment>
+              }
+            />
+
+          </ListItem>
+
+
+
+
+        )})}
+
       </List>
 
     </div>

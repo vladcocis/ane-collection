@@ -19,8 +19,6 @@ const ProductIndex = () => {
     fetchAppointments();
   }, []);
 
-  console.log(products);
-
   return (
     <div>
       <Products_list_card products={products} />

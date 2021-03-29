@@ -6,12 +6,11 @@ import {
 	Button,
 	IconButton,
 	Drawer,
-	Link,
 	MenuItem
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState, useEffect } from "react";
-import { Link as RouterLink } from 'next/link'
+import Link from 'next/link'
 
 import HomeIcon from '@material-ui/icons/Home'
 import InfoIcon from '@material-ui/icons/Info'
@@ -21,11 +20,13 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import CloseIcon from '@material-ui/icons/Close'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import Divider from '@material-ui/core/Divider'
 
 const navLinks = [
 	{ label: 'Home', url: '/', icon: <HomeIcon style={{ fill: '#000' }} />, isSecured: false },
+	{ label: 'Cart', url: '/cart', icon: <ShoppingCartIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'About', url: '/about', icon: <InfoIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'Handmade', url: '/handmade', icon: <BrushIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'Manufactured', url: '/products', icon: <BusinessCenterIcon style={{ fill: '#000' }} />, isSecured: false },
@@ -150,12 +151,7 @@ export default function Header() {
 			return (
 				<div className={drawerLinks} key={label}>
 					<Link
-						{...{
-							component: RouterLink,
-							href: url,
-							color: "inherit",
-							style: { textDecoration: "none" },
-						}}
+						href={url} key={label}
 					>
 						<MenuItem>{icon} {label}</MenuItem>
 					</Link>
@@ -175,17 +171,18 @@ export default function Header() {
 	const getMenuButtons = () => {
 		return navLinks.map(({ label, url }) => {
 			return (
-				<Button
-					{...{
-						key: label,
-						color: "inherit",
-						href: url,
-						component: RouterLink,
-						className: menuButton,
-					}}
-				>
-					{label}
-				</Button>
+				<Link href={url} key={label}>
+					<Button
+						{...{
+							key: label,
+							color: "inherit",
+							href: url,
+							className: menuButton,
+						}}
+					>
+						{label}
+					</Button>
+				</Link >
 			);
 		});
 	};

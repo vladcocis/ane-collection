@@ -49,22 +49,22 @@ const productStyle = makeStyles({
 
 
 var maxSteps = 0;
-const Product_info = ({ data_product}) => {
+const Product_info = ({ data_product }) => {
 
   const [images, setImages] = React.useState({});
 
-      images ?? <h2>Loading...</h2>;
+  images ?? <h2>Loading...</h2>;
 
-        React.useEffect(() => {
-          async function fetchAppointments() {
-            const response = await axios.get(`/api/products/images/${data_product.id}`);
+  React.useEffect(() => {
+    async function fetchAppointments() {
+      const response = await axios.get(`/api/products/images/${data_product.id}`);
 
-            setImages(response.data.payload);
+      setImages(response.data.payload);
 
-          }
+    }
 
-          fetchAppointments();
-        }, []);
+    fetchAppointments();
+  }, []);
 
 
   const pclasses = productStyle();
@@ -82,10 +82,8 @@ const Product_info = ({ data_product}) => {
 
   var img = []
 
-  
-  _.map(images, (p) => {  img.push(p.img); })
 
-
+  _.map(images, (p) => { img.push(p.img); })
 
   maxSteps = img.length
   return (
@@ -93,7 +91,7 @@ const Product_info = ({ data_product}) => {
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <div>
-       {}
+            { }
             <Paper square elevation={0}>
               <Typography></Typography>
             </Paper>
@@ -141,7 +139,7 @@ const Product_info = ({ data_product}) => {
         >
           <Grid item>
             <Typography variant="h4"> </Typography>
-          {data_product.product_name}
+            {data_product.product_name}
             <Typography
               variant="caption"
               display="block"
@@ -152,7 +150,7 @@ const Product_info = ({ data_product}) => {
             </Typography>
           </Grid>
           <Typography variant="body2" className={pclasses.productDescription}>
-          {data_product.product_desc}
+            {data_product.product_desc}
           </Typography>
 
           <Typography variant="subtitle2" className={pclasses.price}>

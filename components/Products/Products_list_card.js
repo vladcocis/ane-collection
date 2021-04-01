@@ -62,8 +62,6 @@ const Products_list_card = ({ products }) => {
 	const { dispatch } = useContext(CartContext)
 	const { state: items } = useContext(CartContext)
 
-	console.log(items)
-
 	const classes = useStyles();
 	const [expanded, setExpanded] = React.useState(false);
 

@@ -56,7 +56,7 @@ const ProductId = () => {
 
 
 <div>
-        //{_.map(product, (p) => {  return(p.id+"-")})}
+        {_.map(product, (p) => {  return(p.id+"-")})}
 
         {_.map(product, (p) => {  return( get_product_id == p.id ? (
 

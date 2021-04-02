@@ -1,4 +1,3 @@
-import SignInSide from "../components/SignInSide";
 import SignUp from "../components/SignUp";
 
 const account =() =>{

@@ -21,17 +21,16 @@ export default withSession(async (req, res) => {
 	}*/
 
 	if (req.method === 'GET') {
-		return res.status(403).json({ status: 403, payload: 'err_forbidden' })
-	}
-
+        return res.status(403).json({ status: 403, payload: 'err_forbidden' })
+    } 
 	const { username, password } = req.body
 
 	const user = await executeQuery({
 		query: `SELECT * FROM user WHERE username='${username}'`
 	})
 
-	if (user.length === 0) {
-		return res.status(404).json({ payload: 'err_user_not_found', status: 404 })
+	if (user.length == 0) {
+		return res.status(200).json({ payload: 'err_user_not_found', status: 404 })
 	}
 
 	compare(password, user[0].password, async function(err, result) {

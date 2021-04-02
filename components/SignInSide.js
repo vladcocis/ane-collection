@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -43,13 +41,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  error:{
+    color: 'red',
+  },
 }));
 
 export default function SignInSide() {
   const classes = useStyles();
 
   const { mutateUser } = useUser({
-		redirectTo: "/profile-sg",
+		redirectTo: "/profile",
 		redirectIfFound: true,
 	});
 
@@ -64,20 +65,22 @@ export default function SignInSide() {
 			password: e.currentTarget.password.value
 		};
 
-		try {
-			setLoading(true)
-			
-			await mutateUser(
+		
+			const response = await mutateUser(
 				fetchJson("/api/auth/login", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(body),
 				}),
 			);
-		} catch (error) {
-			console.error("An unexpected error happened:", error);
-			setErrorMsg(error.data.message);
-		}
+      //console.log(response)
+      if (response.isLoggedIn) {
+        setLoading(true)
+        }
+        else {
+          setErrorMsg("Invalid username or password");
+        }
+		
 	}
 
   return (
@@ -92,6 +95,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {errorMsg.length>0 && <div className={classes.error}><b>{errorMsg}</b></div>  }
           <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
@@ -115,10 +119,6 @@ export default function SignInSide() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -129,11 +129,6 @@ export default function SignInSide() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="overline" color="textPrimary">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="/signup" variant="overline" color="textPrimary">
                   {"Don't have an account? Sign Up"}

@@ -14,11 +14,16 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 	},
     buttons: {
+    width: '15em',
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing(3),
+    padding:'5px',
+    },
+    button: {
+    marginTop: '1em',
     },
   }));
 
@@ -41,8 +46,10 @@ export default function Profile() {
     <p>You can choose to perform any of the actions from below.</p>
     <div className={classes.buttons}>
         
-    <Button onClick={actionLogout} variant="contained" color="primary">Logout</Button>
-    <Button  href='/edit_account' variant="contained" color="primary">Edit Account Details</Button>
+    <Button fullWidth onClick={actionLogout} variant="contained" color="primary" className={classes.button}><b>Logout</b></Button>
+    <Button fullWidth href='/edit_account' variant="contained" color="primary" className={classes.button}><b>Edit Account Details</b></Button>
+    <Button fullWidth href='/order_history' variant="contained" color="primary" className={classes.button}><b>Order History</b></Button>
+    <Button fullWidth href='/payment_history' variant="contained" color="primary" className={classes.button}><b>Payment History</b></Button>
     </div>
     </div>
     </React.Fragment>

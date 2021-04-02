@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '5px',
     },
     button: {
-		marginTop:'6px',
+		marginTop:'16px',
     },
   }));
 
@@ -118,6 +118,7 @@ export default function EditAccountDetails({details}) {
            <Grid container spacing={2} className={classes.container}>
            <Grid item xs={12} sm={6}>
             <TextField 
+                    fullWidth
                     id="outlined-basic" 
                     label="Name" 
                     variant="outlined" 

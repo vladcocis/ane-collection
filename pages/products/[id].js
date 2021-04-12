@@ -44,7 +44,7 @@ const ProductId = () => {
 
         useEffect(() => {
           async function fetchAppointments() {
-            const response = await axios.get(`/api/products/`);
+            const response = await axios.get(`/api/products/get-all-products`);
 
             setProduct(response.data.payload);
           }

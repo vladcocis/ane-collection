@@ -1,11 +1,18 @@
 import React from "react";
 import { CardMedia, Typography } from "@material-ui/core";
 import axios from "axios";
+import { useRouter } from 'next/router'
 
 const ProductCardImage = ({ productId }) => {
   const [image, setImage] = React.useState("");
 
+  const router = useRouter()
+
   React.useEffect(() => {
+    if (!router.isReady) {
+      return
+    }
+
     async function fetchImageByProdId() {
       const response = await axios.get(`/api/products/image/${productId}`);
 
@@ -15,7 +22,7 @@ const ProductCardImage = ({ productId }) => {
     }
 
     fetchImageByProdId();
-  }, []);
+  }, [router.isReady]);
 
   image ?? (
     <Typography variant="h3" component="h2">

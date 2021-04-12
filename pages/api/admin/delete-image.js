@@ -8,7 +8,7 @@ export default withSession(async (req, res) => {
 
 	const user = req.session.get('user')
 
-	if (!user.isLoggedIn || !user.isAdmin) {
+	if (!user.isAdmin) {
 		return res.status(403).json({ status: 403, payload: 'Forbidden request.' })
 	}
 

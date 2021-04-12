@@ -112,9 +112,12 @@ const Row = ({ details }) => {
     const handleImageDeleteClick = async (e, id) => {
         e.preventDefault()
 
-        console.log(id)
         try {
-            const response = await 
+            const response = await axios.post(`/api/admin/delete-image`, { id })
+
+            if (response.status === 200 && response.data.status === 200) {
+                setImages(images.filter((it) => it.image_id !== id))
+            }
         } catch (error) {
             console.error(error)
         }

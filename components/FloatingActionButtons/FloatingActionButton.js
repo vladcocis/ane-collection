@@ -4,6 +4,9 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { makeStyles } from '@material-ui/core'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Button from '@material-ui/core/Button'
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => ({
 	fabColor2: {
@@ -20,6 +23,14 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: '#fde8ff'
 		}
 	},
+	shoppingCartButton: {
+		position: 'flex',
+		backgroundColor: 'gold',
+		'&:hover': {
+			backgroundColor: 'black',
+			color: 'white'
+		}
+	}
 }))
 
 export default function FloatingActionButtons() {
@@ -27,6 +38,13 @@ export default function FloatingActionButtons() {
 
 	return (
 		<div className='root'>
+			<div className='icon__container'>
+				<Link href="/cart">
+					<Button className={classes.shoppingCartButton}>
+						<ShoppingCartIcon />
+					</Button>
+				</Link>
+			</div>
 			<div className='icon__container'>
 				<Fab className={classes.fabColor1} color="primary" aria-label="call" href="tel:+447470718754">
 					<PhoneIcon />

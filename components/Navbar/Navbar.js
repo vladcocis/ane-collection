@@ -20,13 +20,10 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import CloseIcon from '@material-ui/icons/Close'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-
 import Divider from '@material-ui/core/Divider'
 
 const navLinks = [
 	{ label: 'Home', url: '/', icon: <HomeIcon style={{ fill: '#000' }} />, isSecured: false },
-	{ label: 'Cart', url: '/cart', icon: <ShoppingCartIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'About', url: '/about', icon: <InfoIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'Handmade', url: '/handmade', icon: <BrushIcon style={{ fill: '#000' }} />, isSecured: false },
 	{ label: 'Manufactured', url: '/products', icon: <BusinessCenterIcon style={{ fill: '#000' }} />, isSecured: false },

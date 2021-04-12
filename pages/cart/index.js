@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../components/cart/CartProvider'
 import _ from 'lodash'
 import CartTotal from '../../components/cart/CartTotal'
+import Loader from '../../components/Loader'
 
 const CartPage = () => {
     const { state: items } = useContext(CartContext)
@@ -15,8 +16,6 @@ const CartPage = () => {
         async function fetchProducts() {
             const response = await axios.get(`/api/cart/get-all-products`)
 
-            console.log(response.data.payload)
-
             if (response.status === 200) {
                 setProducts(response.data.payload)
                 setLoaded(true)
@@ -25,8 +24,6 @@ const CartPage = () => {
 
         fetchProducts()
     }, [])
-
-    //    console.log(items)
 
     return loaded ? (
         <div style={{ padding: '5rem' }}>
@@ -60,7 +57,7 @@ const CartPage = () => {
 
             <CartTotal products={products} />
         </div>
-    ) : <h1>Loading</h1>
+    ) : <Loader />
 }
 
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from 'next/router'
 
 const ProductCardImage = ({ productId }) => {
-  const [image, setImage] = React.useState("");
+  const [image, setImage] = React.useState("https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif");
 
   const router = useRouter()
 

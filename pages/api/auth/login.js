@@ -39,6 +39,7 @@ export default withSession(async (req, res) => {
 				username: user[0].username,
 				id: user[0].id,
 				name: user[0].name,
+				isAdmin: user[0].is_admin,
 			}
 
 			req.session.set('user', claim)

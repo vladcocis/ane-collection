@@ -73,9 +73,23 @@ const AdminIndex = () => {
     const renderItems = () => {
         return _.map(products, (it, index) => {
             return (
-                <Row key={index} details={it} />
+                <Row handleRowDelete={handleRowDelete} key={index} details={it} />
             )
         })
+    }
+
+    const handleRowDelete = async (e, id) => {
+        e.preventDefault()
+
+        try {
+            const response = await axios.post(`/api/admin/delete-product`, { id })
+
+            if (response.status === 200 && response.data.status === 200) {
+               router.reload()
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (

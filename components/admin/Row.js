@@ -81,7 +81,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Row = ({ details }) => {
+const Row = ({ details, handleRowDelete }) => {
     const classes = useStyles()
     const [images, setImages] = useState([])
     const [loaded, setLoaded] = useState(false)
@@ -104,10 +104,6 @@ const Row = ({ details }) => {
 
         fetchProductImages()
     }, [])
-
-    const handleDeleteClick = (e, id) => {
-        console.log(id)
-    }
 
     const handleImageDeleteClick = async (e, id) => {
         e.preventDefault()
@@ -159,7 +155,7 @@ const Row = ({ details }) => {
 
             <StyledTableCell>
                 {edit ? <Button onClick={(e, id) => handleEditConfirm(e, details.product_id)}><DoneIcon /></Button> : <Button onClick={(e, id) => handleEditClick(e, details.product_id)}><CreateIcon /></Button>}
-                <Button onClick={(e, id) => handleDeleteClick(e, details.product_id)}><DeleteIcon /></Button>
+                <Button onClick={(e, id) => handleRowDelete(e, details.product_id)}><DeleteIcon /></Button>
             </StyledTableCell>
 
             <Dialog fullScreen open={edit} onClose={handleClose} TransitionComponent={Transition}>

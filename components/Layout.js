@@ -1,24 +1,27 @@
 import Head from 'next/head'
 import FloatingActionButton from './FloatingActionButtons/FloatingActionButton'
-import Footer from'../components/Footer'
+import Footer from '../components/Footer'
 import Navbar from '../components/Navbar/Navbar'
+import { useRouter } from 'next/router'
 
 const Layout = ({ children }) => {
+    const router = useRouter()
+
     return (
         <>
             <Head>
                 <title>Ane Collection</title>
             </Head>
 
-            <FloatingActionButton />
+            {router.pathname !== '/admin' ? <FloatingActionButton /> : null}
 
             <Navbar />
 
-            <div className="main" style={{marginBottom: '30px'}}>
+            <div className="main" style={{ marginBottom: '30px' }}>
                 {children}
             </div>
-            
-            <Footer/>
+
+            <Footer />
         </>
     )
 }

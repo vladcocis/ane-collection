@@ -24,6 +24,15 @@ export default withSession(async (req, res) => {
 			return res.status(500).json({ status: 500, payload: 'Internal Server error.' })
 		}
 
+        const response2 = await executeQuery({
+			query: `DELETE FROM product_images WHERE product_id='${id}'`,
+		})
+
+		if (response2.error) {
+			console.error(response2.error)
+			return res.status(500).json({ status: 500, payload: 'Internal Server error.' })
+		}
+
 		return res.status(200).json({ status: 200, payload: 'Deletion OK' })
 	} catch (err) {
 		console.error(err)

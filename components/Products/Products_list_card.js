@@ -88,7 +88,7 @@ const Products_list_card = ({ products }) => {
 										className={classes.header}
 										title={it.product_name}
 									/>
-									<ProductCardImage productId={it.id} />
+									<ProductCardImage productId={it.id} productName={it.product_name}/>
 									<CardContent className={classes.sub}>
 										<Typography
 											className={classes.sub}

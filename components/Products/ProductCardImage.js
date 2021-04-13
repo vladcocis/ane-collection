@@ -3,7 +3,7 @@ import { CardMedia, Typography } from "@material-ui/core";
 import axios from "axios";
 import { useRouter } from 'next/router'
 
-const ProductCardImage = ({ productId }) => {
+const ProductCardImage = ({ productId, productName}) => {
 	const [image, setImage] = React.useState("https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif");
 
 	const router = useRouter()
@@ -42,7 +42,7 @@ const ProductCardImage = ({ productId }) => {
 				paddingTop: "56.25%",
 			}}
 			image={image}
-			title={"Lorem Ipsum"}
+			title={productName}
 		/>
 	);
 };

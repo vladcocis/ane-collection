@@ -109,8 +109,6 @@ export default function Header() {
 		return <Loader />
 	}
 
-	console.log(auth)
-
 	const displayDesktop = () => {
 		return (
 			<Toolbar className={toolbar}>

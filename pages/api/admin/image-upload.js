@@ -19,7 +19,7 @@ export default withSession(async (req, res) => {
             return res.status(500).json({ status: 500, message: 'Internal server error. Please try again.' })
         }
 
-        if (!currentUser) {
+        if (!currentUser.isAdmin) {
             return res.status(403).json({ status: 403, message: 'Data transaction forbidden.' })
         }
 

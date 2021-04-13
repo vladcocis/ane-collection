@@ -1,3 +1,4 @@
+import React from 'react'
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button'
@@ -7,24 +8,17 @@ import TableRow from '@material-ui/core/TableRow';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import _ from 'lodash'
-import { Grid, Input } from '@material-ui/core';
-import DoneIcon from '@material-ui/icons/Done';
+import { Grid } from '@material-ui/core';
 import { TextField, TextareaAutosize, Container, MenuItem } from '@material-ui/core'
-import React from 'react'
-
 import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import Link from 'next/link'
 import Select from '@material-ui/core/Select';
+import { useRouter } from 'next/router';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -142,13 +136,56 @@ const Row = ({ details, handleRowDelete }) => {
         formData.append('selectedFile', e.target.files[0])
         formData.append('product_id', details.product_id)
 
-        const response = await axios.post(`/api/admin/image-upload`, formData)
+        try {
+            const response = await axios.post(`/api/admin/image-upload`, formData)
+        } catch (error) {
+            alert('Something went wrong.')
+            console.error(error)
+        }
     }
+
+    const router = useRouter()
 
     const handleEditConfirm = async (e) => {
         e.preventDefault()
 
+        try {
+            const response = await axios.post(`/api/admin/change-product`, { name, category, price, stock, desc, id })
+            if (response.status === 200 && response.data.status === 200) {
+                router.reload()
+            }
+        } catch (err) {
+            console.error(err)
+        }
+
         setEdit(false)
+    }
+
+    const [name, setName] = useState(details.product_name)
+    const [category, setCategory] = useState(details.category_id)
+    const [price, setPrice] = useState(details.product_price)
+    const [stock, setStock] = useState(details.stock)
+    const [desc, setDesc] = useState(details.product_desc)
+    const [id, setId] = useState(details.product_id)
+
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value)
+    }
+
+    const handleDescChange = (e) => {
+        setDesc(e.target.value)
+    }
+
+    const handleStockChange = (e) => {
+        setStock(e.target.value)
+    }
+
+    const handlePriceChange = (e) => {
+        setPrice(e.target.value)
     }
 
     return (
@@ -195,6 +232,7 @@ const Row = ({ details, handleRowDelete }) => {
                                     name="product_name"
                                     autoFocus
                                     defaultValue={details.product_name}
+                                    onChange={handleNameChange}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -205,6 +243,7 @@ const Row = ({ details, handleRowDelete }) => {
                                     defaultValue={details.category_id}
                                     fullWidth
                                     label="Category"
+                                    onChange={handleCategoryChange}
                                 >
                                     <MenuItem value={1}>Handmade</MenuItem>
                                     <MenuItem value={2}>Manufactured</MenuItem>
@@ -222,6 +261,7 @@ const Row = ({ details, handleRowDelete }) => {
                                     autoFocus
                                     rows="6"
                                     defaultValue={details.product_desc}
+                                    onChange={handleDescChange}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -234,6 +274,7 @@ const Row = ({ details, handleRowDelete }) => {
                                     name="product_price"
                                     autoFocus
                                     defaultValue={details.product_price}
+                                    onChange={handlePriceChange}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -246,6 +287,7 @@ const Row = ({ details, handleRowDelete }) => {
                                     name="stock"
                                     autoFocus
                                     defaultValue={details.stock}
+                                    onChange={handleStockChange}
                                 />
                             </Grid>
 

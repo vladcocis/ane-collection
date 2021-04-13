@@ -85,7 +85,7 @@ const AdminIndex = () => {
             const response = await axios.post(`/api/admin/delete-product`, { id })
 
             if (response.status === 200 && response.data.status === 200) {
-               router.reload()
+                router.reload()
             }
         } catch (error) {
             console.error(error)

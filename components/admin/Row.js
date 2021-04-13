@@ -137,11 +137,7 @@ const Row = ({ details, handleRowDelete }) => {
         })
     }
 
-    const [selectedFile, setSelectedFile] = useState(null)
-
     const onFileChange = async (e) => {
-        //setSelectedFile(e.target.files)
-
         const formData = new FormData()
         formData.append('selectedFile', e.target.files[0])
         formData.append('product_id', details.product_id)

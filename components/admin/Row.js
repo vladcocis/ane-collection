@@ -123,10 +123,6 @@ const Row = ({ details, handleRowDelete }) => {
         setEdit(true)
     }
 
-    const handleEditConfirm = () => {
-        setEdit(false)
-    }
-
     const handleClose = () => {
         setEdit(false)
     }
@@ -139,6 +135,24 @@ const Row = ({ details, handleRowDelete }) => {
                 </Grid>
             )
         })
+    }
+
+    const [selectedFile, setSelectedFile] = useState(null)
+
+    const onFileChange = async (e) => {
+        //setSelectedFile(e.target.files)
+
+        const formData = new FormData()
+        formData.append('selectedFile', e.target.files[0])
+        formData.append('product_id', details.product_id)
+
+        const response = await axios.post(`/api/admin/image-upload`, formData)
+    }
+
+    const handleEditConfirm = async (e) => {
+        e.preventDefault()
+
+        setEdit(false)
     }
 
     return (
@@ -154,7 +168,7 @@ const Row = ({ details, handleRowDelete }) => {
             </StyledTableCell>
 
             <StyledTableCell>
-                {edit ? <Button onClick={(e, id) => handleEditConfirm(e, details.product_id)}><DoneIcon /></Button> : <Button onClick={(e, id) => handleEditClick(e, details.product_id)}><CreateIcon /></Button>}
+                <Button onClick={(e, id) => handleEditClick(e, details.product_id)}><CreateIcon /></Button>
                 <Button onClick={(e, id) => handleRowDelete(e, details.product_id)}><DeleteIcon /></Button>
             </StyledTableCell>
 
@@ -244,12 +258,12 @@ const Row = ({ details, handleRowDelete }) => {
                                     accept="image/*"
                                     className={classes.input}
                                     id="contained-button-file"
-                                    multiple
                                     type="file"
+                                    onChange={onFileChange}
                                 />
                                 <label htmlFor="contained-button-file">
                                     <Button variant="contained" color="primary" component="span">
-                                        Upload Images
+                                        Upload Image
                                     </Button>
                                 </label>
 

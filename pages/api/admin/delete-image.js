@@ -23,11 +23,9 @@ export default withSession(async (req, res) => {
 			console.error(response.error)
 			return res.status(500).json({ status: 500, payload: 'Internal Server error.' })
 		}
-
-		
 	} catch (err) {
 		console.error(err)
 	}
 
-	return res.status(500).json({ status: 500, message: "Internal server error." })
+	return res.status(200).json({ status: 200, payload: 'Deletion OK' })
 })

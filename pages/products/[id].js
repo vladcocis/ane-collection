@@ -34,11 +34,10 @@ const ProductId = () => {
 	useEffect(() => {
 		async function fetchAppointments() {
 			const response = await axios.get(`/api/products/get-all-products/`);
-
 			setProduct(response.data.payload);
 		}
-
 		fetchAppointments();
+		
 	}, []);
 
 	return (

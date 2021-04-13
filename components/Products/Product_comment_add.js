@@ -9,23 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Container, Grid } from '@material-ui/core'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Loader from '../../components/Loader'
-import Row from '../../components/admin/Row'
 import { TextField, TextareaAutosize, MenuItem } from '@material-ui/core'
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import Select from '@material-ui/core/Select';
-import Slide from '@material-ui/core/Slide';
 
 
 
@@ -111,11 +96,11 @@ const Product_comment_add = ({ productId_comment }) => {
 										<Select
 											labelId="demo-simple-select-label"
 											id="demo-simple-select"
-											fullWidth
+											width="10%"
 											label="rating"
 											name="rating"
 											id="rating"
-											defaultValue={2}
+											defaultValue={5}
 										>
 											<MenuItem value={1}>1</MenuItem>
 											<MenuItem value={2}>2</MenuItem>

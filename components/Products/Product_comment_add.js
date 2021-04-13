@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	textareaField: {
-		width: '100%'
+		width: '80%'
 	},
 	textFieldSmall: {
 		width: '100%',

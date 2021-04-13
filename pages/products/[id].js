@@ -9,6 +9,7 @@ import Product_info from "../../components/Products/Product_info";
 
 import Product_comment from "../../components/Products/Product_comment";
 
+import Product_comment_add from "../../components/Products/Product_comment_add";
 const classesr = makeStyles({
   root: {
     marginTop: "7rem",
@@ -19,19 +20,7 @@ const classesr = makeStyles({
   },
 });
 
-/*
-A showroom-img column should be created in the product table in the database.
-*/
-const data_product = JSON.parse(
-  '{"id":"0", "product_name":"nyan", "category_id":"10", "product_desc":"I am i cat", "showroomImg": "https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2021%2F02%2Fchris-torres-nyan-cat-foundation-10-year-anniversay-auction-001.jpg?quality=95&w=1170&cbr=1&q=90&fit=max"}'
-);
-
-const data_comments = JSON.parse(
-  '{"id":"0","p_id":"0","name": "AVRİL LAVIGNE", "comment":"ROCK N ROLL " }'
-);
-
-//const data_product_images = JSON.parse("");
-
+ 
 const ProductId = () => {
   const classes = classesr();
   const router = useRouter()
@@ -44,7 +33,7 @@ const ProductId = () => {
 
         useEffect(() => {
           async function fetchAppointments() {
-            const response = await axios.get(`/api/products/get-all-products`);
+            const response = await axios.get(`/api/products/`);
 
             setProduct(response.data.payload);
           }
@@ -66,8 +55,9 @@ const ProductId = () => {
               data_product={p}
               key=''
             />
-              <Product_comment className={classes.comments} comments={get_product_id} />
 
+              <Product_comment className={classes.comments} comments={get_product_id} />
+              <Product_comment_add productId_comment={get_product_id}/>
             </div>
 
 

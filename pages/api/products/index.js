@@ -3,7 +3,7 @@ import executeQuery from '../../../lib/db'
 export default async (req, res) => {
 	try {
 		const response = await executeQuery({
-			query: 'SELECT * FROM product where category_id = 1'
+			query: 'SELECT * FROM product where category_id = 2'
 		})
 
 		console.log(response)

@@ -4,42 +4,47 @@ import axios from "axios";
 import { useRouter } from 'next/router'
 
 const ProductCardImage = ({ productId }) => {
-  const [image, setImage] = React.useState("https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif");
+	const [image, setImage] = React.useState("https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif");
 
-  const router = useRouter()
+	const router = useRouter()
 
-  React.useEffect(() => {
-    if (!router.isReady) {
-      return
-    }
+	React.useEffect(() => {
+		if (!router.isReady) {
+			return
+		}
 
-    async function fetchImageByProdId() {
-      const response = await axios.get(`/api/products/image/${productId}`);
+		async function fetchImageByProdId() {
+			const response = await axios.get(`/api/products/image/${productId}`);
 
-      if (response.status === 200) {
-        setImage(response.data.payload[0].img);
-      }
-    }
+			try {
+				if (response.status === 200) {
+					setImage(response.data.payload[0].img);
+				}
+			} catch (error) {
+				setImage('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png')
+				console.warn(`Image for product with ${productId} does not currently have an image.`)
+			}
+		}
 
-    fetchImageByProdId();
-  }, [router.isReady]);
+		fetchImageByProdId();
+	}, [router.isReady]);
 
-  image ?? (
-    <Typography variant="h3" component="h2">
-      Loading...
-    </Typography>
-  );
+	image ?? (
+		<Typography variant="h3" component="h2">
+			Loading...
+		</Typography>
+	);
 
-  return (
-    <CardMedia
-      style={{
-        height: 350,
-        paddingTop: "56.25%",
-      }}
-      image={image}
-      title={"Lorem Ipsum"}
-    />
-  );
+	return (
+		<CardMedia
+			style={{
+				height: 350,
+				paddingTop: "56.25%",
+			}}
+			image={image}
+			title={"Lorem Ipsum"}
+		/>
+	);
 };
 
 export default ProductCardImage;

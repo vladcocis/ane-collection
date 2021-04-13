@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
@@ -40,13 +39,19 @@ const Product_comment = ({ comments }) => {
 
 
 	useEffect(() => {
-		async function fetchAppointments() {
+		async function fetchComments() {
 			const response = await axios.get(`/api/products/comments/${comments}`);
-
 			setComment(response.data.payload);
 		}
 
-		fetchAppointments();
+		async function fetchUsers() {
+			const response = await axios.get(`/api/products/username/`);
+			setUser(response.data.payload);
+		}
+
+		window.scrollTo(0, 0)
+		fetchUsers();
+		fetchComments();
 	}, []);
 
 
@@ -54,18 +59,6 @@ const Product_comment = ({ comments }) => {
 	const [user, setUser] = useState({});
 
 	user ?? <h2>Loading...</h2>;
-
-
-	useEffect(() => {
-		async function fetchAppointments() {
-			const response = await axios.get(`/api/products/username/`);
-
-			setUser(response.data.payload);
-		}
-
-		fetchAppointments();
-	}, []);
-
 
 	return (
 		<div>

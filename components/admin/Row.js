@@ -150,7 +150,7 @@ const Row = ({ details, handleRowDelete }) => {
         e.preventDefault()
 
         try {
-            const response = await axios.post(`/api/admin/change-product`, { name, category, price, stock, desc, id })
+            const response = await axios.post(`/api/admin/change-product`, { name, category, price, stock, desc, id: details.product_id })
             if (response.status === 200 && response.data.status === 200) {
                 router.reload()
             }
@@ -166,7 +166,6 @@ const Row = ({ details, handleRowDelete }) => {
     const [price, setPrice] = useState(details.product_price)
     const [stock, setStock] = useState(details.stock)
     const [desc, setDesc] = useState(details.product_desc)
-    const [id, setId] = useState(details.product_id)
 
     const handleNameChange = (e) => {
         setName(e.target.value)
@@ -197,7 +196,8 @@ const Row = ({ details, handleRowDelete }) => {
             <StyledTableCell align="center">{details.stock}</StyledTableCell>
 
             <StyledTableCell>
-                {images.length && loaded ? <Grid container>{displayImages()}</Grid> : 'Loading...'}
+                {loaded ? <Grid container>{displayImages()}</Grid> : 'Loading...'}
+                {!images.length && 'No images.'}
             </StyledTableCell>
 
             <StyledTableCell>

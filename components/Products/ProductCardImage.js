@@ -21,7 +21,7 @@ const ProductCardImage = ({ productId }) => {
 					setImage(response.data.payload[0].img);
 				}
 			} catch (error) {
-				setImage('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png')
+				setImage('https://i.stack.imgur.com/y9DpT.jpg')
 				console.warn(`Image for product with ${productId} does not currently have an image.`)
 			}
 		}

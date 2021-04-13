@@ -22,9 +22,12 @@ const reducer = (state, action) => {
                     return it
                 })
 
+                // emergency localStorage eraser
+                //localStorage.removeItem('cart')
+
                 if (JSON.parse(localStorage.getItem('cart')) !== currentCart && currentCart.length) {
                     localStorage.setItem('cart', JSON.stringify(currentCart))
-                    console.log(JSON.parse(localStorage.getItem('cart')))
+                    //console.log(JSON.parse(localStorage.getItem('cart')))
                 }
 
                 return currentCart

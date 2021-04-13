@@ -78,7 +78,6 @@ const Products_list_card = ({ products }) => {
 	return (
 		<Container style={{ marginTop: "5em" }}>
 			<Grid container spacing={2}>
-				<h1>Cart items: {items.length}</h1>
 				{_.map(products, (it) => {
 					return (
 						<Grid item xs={12} md={3} key={it.id}>

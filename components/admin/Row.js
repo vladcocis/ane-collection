@@ -197,7 +197,7 @@ const Row = ({ details, handleRowDelete }) => {
 
             <StyledTableCell>
                 {loaded ? <Grid container>{displayImages()}</Grid> : 'Loading...'}
-                {!images.length && 'No images.'}
+                {(!images.length && loaded) && 'No images.'}
             </StyledTableCell>
 
             <StyledTableCell>

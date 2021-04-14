@@ -45,7 +45,8 @@ export default function Profile() {
     <h1 style={{ marginTop: '3em' }}> Hello, this is your profile page</h1>
     <p>You can choose to perform any of the actions from below.</p>
     <div className={classes.buttons}>
-        
+
+    <Button fullWidth href='/review_history' variant="contained" color="primary" className={classes.button}><b>Review History</b></Button> 
     <Button fullWidth href='/edit_account' variant="contained" color="primary" className={classes.button}><b>Edit Account Details</b></Button>
     <Button fullWidth href='/order_history' variant="contained" color="primary" className={classes.button}><b>Order History</b></Button>
     <Button fullWidth href='/payment_history' variant="contained" color="primary" className={classes.button}><b>Payment History</b></Button>

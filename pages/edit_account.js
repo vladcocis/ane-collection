@@ -47,7 +47,7 @@ const edit_account =() =>{
       }
 
     return(
-        <React.Fragment>
+        <div>
             <div  className={classes.root}>
         
             <h1 > You can edit your account details here</h1>
@@ -55,7 +55,7 @@ const edit_account =() =>{
             <AccountAddress/>
             
             </div>
-    </React.Fragment>
+    </div>
     )
 }
 

@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(8),
         height: 800,
-        margin: '35em',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',

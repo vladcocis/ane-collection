@@ -101,7 +101,7 @@ export default function EditAccountDetails({details}) {
 
 
   return (
-    <React.Fragment>
+    <div>
         <div>
            <form className={classes.root} noValidate autoComplete="off">
            <Grid container spacing={2} className={classes.container}>
@@ -124,7 +124,7 @@ export default function EditAccountDetails({details}) {
                     {edit? getSaveButton() : getEditButton()}
                     </form>
         </div>
-    </React.Fragment>
+    </div>
   );
 };
 

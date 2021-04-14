@@ -72,6 +72,16 @@ export const withProducts = async () => {
     }
 }
 
+export const getProductsTotalCount = (products, items) => {
+    let totalCount = 0
+
+    items.map(({ id, amount }) => {
+        totalCount += amount
+    })
+
+    return totalCount
+}
+
 export const getTotalSum = (products, items) => {
     return items
         .map(({ id, amount }) => ({

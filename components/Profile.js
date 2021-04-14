@@ -46,10 +46,11 @@ export default function Profile() {
     <p>You can choose to perform any of the actions from below.</p>
     <div className={classes.buttons}>
         
-    <Button fullWidth onClick={actionLogout} variant="contained" color="primary" className={classes.button}><b>Logout</b></Button>
     <Button fullWidth href='/edit_account' variant="contained" color="primary" className={classes.button}><b>Edit Account Details</b></Button>
     <Button fullWidth href='/order_history' variant="contained" color="primary" className={classes.button}><b>Order History</b></Button>
     <Button fullWidth href='/payment_history' variant="contained" color="primary" className={classes.button}><b>Payment History</b></Button>
+    <br></br>
+    <Button fullWidth onClick={actionLogout} variant="contained" color="primary" className={classes.button}><b>Logout</b></Button>
     </div>
     </div>
     </React.Fragment>

@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(8),
     padding: '1em',
     display: 'flex',
-    flexDirection: 'column'
-    },
+    flexDirection: 'column',
+    }
   }));
 
 

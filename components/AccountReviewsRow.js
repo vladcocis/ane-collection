@@ -12,7 +12,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         alignItems: 'center',
         alignContent: 'center',
-        border: 'solid',
+        border: 'thin',
+        borderRadius: '2.5em',
+        boxShadow: '0 0  15px #a1dafc'
     },
     img_container: {
         height:'100%',

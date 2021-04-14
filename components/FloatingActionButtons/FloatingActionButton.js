@@ -51,44 +51,25 @@ const useStyles = makeStyles((theme) => ({
 export default function FloatingActionButtons() {
 	const classes = useStyles()
 	const { state: items } = React.useContext(CartContext)
-	const [products, setProducts] = useState([])
-	const [loaded, setLoaded] = useState(false)
+	let totalCount = getProductsTotalCount(items)
 
-	useEffect(() => {
-		async function fetchProducts() {
-			try {
-				const response = await axios.get(`/api/products`);
+	console.log(totalCount)
+	console.log(items)
 
-				if (response.status === 200) {
-					setProducts(response.data.payload)
-					setLoaded(true)
-				}
-			} catch (error) {
-				console.error(error)
-			}
-		}
+	if (!totalCount) {
+		totalCount = 0
+	}
 
-		fetchProducts()
-	}, [])
-
-	const totalCount = getProductsTotalCount(products, items)
-
-	return loaded ? (
+	return (
 		<div className='root'>
 			<div className='icon__container'>
-				<i className={classes.cartCount}>{totalCount}</i>
+				<span className={classes.cartCount}>{totalCount}</span>
 				<Link href="/cart">
 					<Button className={classes.shoppingCartButton}>
 						<ShoppingCartIcon />
 					</Button>
 				</Link>
 			</div>
-			<div className='icon__container'>
-				<Fab className={classes.fabColor1} color="primary" aria-label="call" href="tel:+447470718754">
-					<PhoneIcon />
-				</Fab>
-			</div>
-
 			<div className='icon__container'>
 				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
 					<FacebookIcon />
@@ -100,5 +81,5 @@ export default function FloatingActionButtons() {
 				</Fab>
 			</div>
 		</div>
-	) : null;
+	)
 }

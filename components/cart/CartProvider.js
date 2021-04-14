@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ITEM':
             const id = action.payload.productId
-            const entry = state.find((it) => it.id === id)
+            let entry = state.find((it) => it.id === id)
             let currentCart
 
             if (entry) {
@@ -22,12 +22,11 @@ const reducer = (state, action) => {
                     return it
                 })
 
-                // emergency localStorage eraser
-                //localStorage.removeItem('cart')
+                // emergency localStorage eraser for development purposes only
+                // localStorage.removeItem('cart')
 
                 if (JSON.parse(localStorage.getItem('cart')) !== currentCart && currentCart.length) {
                     localStorage.setItem('cart', JSON.stringify(currentCart))
-                    //console.log(JSON.parse(localStorage.getItem('cart')))
                 }
 
                 return currentCart
@@ -36,18 +35,33 @@ const reducer = (state, action) => {
             return [...state, { id, amount: 1 }]
 
         case 'ADJUST_AMOUNT':
-            const { amount } = action.payload
+            const { productId } = action.payload
+            const changeAmount = action.payload.amount
 
-            return _.map(state, (it) => {
-                if (items.id === id) {
+            entry = state.find((it) => it.id === productId)
+            //localStorage.removeItem('cart')
+
+            currentCart = state.map((it) => {
+                if (it.id === productId) {
+                    if (entry.amount + changeAmount === 0) {
+                        console.log(state)
+                        return [...state.filter(it => it.amount !== 0)]
+                    }
+
                     return {
                         ...it,
-                        amount
+                        amount: entry.amount + changeAmount > 0 ? entry.amount + changeAmount : 0
                     }
                 }
 
-                return item
+                return it
             })
+
+            if (JSON.parse(localStorage.getItem('cart')) !== currentCart && currentCart.length) {
+                localStorage.setItem('cart', JSON.stringify(currentCart))
+            }
+
+            return currentCart
 
         case 'LOAD_FROM_LOCALSTORAGE':
             const items = action.payload
@@ -72,7 +86,7 @@ export const withProducts = async () => {
     }
 }
 
-export const getProductsTotalCount = (products, items) => {
+export const getProductsTotalCount = (items) => {
     let totalCount = 0
 
     items.map(({ id, amount }) => {
@@ -99,8 +113,9 @@ const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     React.useEffect(() => {
-        if (localStorage) {
+        if (localStorage.getItem('cart') !== undefined) {
             setStorageLoaded(true)
+            //localStorage.removeItem('cart')
             dispatch({ type: "LOAD_FROM_LOCALSTORAGE", payload: JSON.parse(localStorage.getItem('cart')) })
         }
     }, [])

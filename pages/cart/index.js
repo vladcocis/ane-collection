@@ -2,9 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../components/cart/CartProvider'
 import _ from 'lodash'
-import CartTotal from '../../components/cart/CartTotal'
 import Loader from '../../components/Loader'
-import Checkout from '../../components/cart/Checkout'
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -15,47 +13,33 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Link from 'next/link'
 import Button from '@material-ui/core/Button'
+import { Typography } from '@material-ui/core'
 
-const TAX_RATE = 0.07;
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 700,
     },
     TableContainer: {
-        marginBottom: '4rem'
+        marginBottom: '4rem',
+        marginTop: theme.spacing(4)
+    },
+    amountButton: {
+        padding: 0,
+        maxWidth: 40,
+        minWidth: 30,
+        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2)
     }
-});
+}))
 
 function ccyFormat(num) {
-    return `${num.toFixed(2)}`;
+    return `${num.toFixed(2)}`
 }
-
-function priceRow(qty, unit) {
-    return qty * unit;
-}
-
-function createRow(desc, qty, unit) {
-    const price = priceRow(qty, unit);
-    return { desc, qty, unit, price };
-}
-
-function subtotal(items) {
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
-
-const rows = [
-    createRow('Paperclips (Box)', 100, 1.15),
-    createRow('Paper (Case)', 10, 45.99),
-    createRow('Waste Basket', 2, 17.99),
-];
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 const CartPage = () => {
     const { state: items } = useContext(CartContext)
+    const { dispatch } = useContext(CartContext)
+
     const [products, setProducts] = useState([])
     const [loaded, setLoaded] = useState(false)
 
@@ -77,11 +61,27 @@ const CartPage = () => {
         fetchProducts()
     }, [])
 
+    const handleIncrementClick = (e, productId) => {
+        e.preventDefault()
+
+        console.log(productId)
+
+        return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: 1 } })
+    }
+
+    const handleDecrementClick = (e, productId) => {
+        e.preventDefault()
+
+        console.log(productId)
+
+        return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: -1 } })
+    }
+
     return loaded ? (
         <div style={{ padding: '5rem' }}>
-            <h1>Cart ITEMS</h1>
+            <Typography component="h2" variant="h2">Shopping Cart</Typography>
 
-            <TableContainer component={Paper} className={classes.TableContainer}>
+            <TableContainer component={Paper} elevation={20} className={classes.TableContainer}>
                 <Table className={classes.table} aria-label="spanning table">
                     <TableHead>
                         <TableRow>
@@ -100,18 +100,24 @@ const CartPage = () => {
                     <TableBody>
 
                         {_.map(items, ({ id, amount }) => {
-                            const product = findProduct(id)
-                            let finalPrice = amount * product.product_price
-                            totalPrice += parseInt(finalPrice)
+                            if (id && amount) {
+                                const product = findProduct(id)
+                                let finalPrice = amount * product.product_price
+                                totalPrice += parseInt(finalPrice)
 
-                            return (
-                                <TableRow key={id}>
-                                    <TableCell>{product.product_name}</TableCell>
-                                    <TableCell align="right">{amount}</TableCell>
-                                    <TableCell align="right">{product.product_price}</TableCell>
-                                    <TableCell align="right">{finalPrice}</TableCell>
-                                </TableRow>
-                            )
+                                return (
+                                    <TableRow key={id}>
+                                        <TableCell>{product.product_name}</TableCell>
+                                        <TableCell align="right">
+                                            <Button onClick={(e) => handleDecrementClick(e, id)} className={classes.amountButton} variant="outlined">-</Button>
+                                            {amount}
+                                            <Button onClick={(e) => handleIncrementClick(e, id)} className={classes.amountButton} variant="outlined">+</Button>
+                                        </TableCell>
+                                        <TableCell align="right">{product.product_price}</TableCell>
+                                        <TableCell align="right">{finalPrice}</TableCell>
+                                    </TableRow>
+                                )
+                            }
                         })}
 
                         <TableRow>

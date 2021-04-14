@@ -4,9 +4,8 @@ import Paper from '@material-ui/core/Paper'
 import Carousel from 'react-material-ui-carousel'
 import _ from 'lodash'
 import React from 'react'
-import { Link as RouterLink } from 'next/link'
-import Link from '@material-ui/core/Link'
-
+import { useRouter } from 'next/router';
+import Link from "next/link";
 
 import {
 	Card,
@@ -118,16 +117,16 @@ const useStyles = makeStyles((theme) => ({
 const items = [
 	{
 		Name: "Exquisite jewellery",
-		Caption: "Shop our finest pieces by browsing the handmade and manufactured catalogues",
+		Caption: "Shop our finest pieces by browsing the Handmade and Angel Collections",
 		contentPosition: "left",
 		Items: [
 			{
-				Name: "Handmade",
+				Name: "Handmade Collection",
 				Image: "https://source.unsplash.com/0vwTn3twzJY",
 				link: "/handmade"
 			},
 			{
-				Name: "Manufactured",
+				Name: "Angel Collection",
 				Image: "https://source.unsplash.com/uf_IDewI6iQ",
 				link: "/products"
 			}
@@ -140,16 +139,22 @@ const items = [
 		Items: [
 			{
 				Name: "About us",
-				Image: "https://source.unsplash.com/Oalh2MojUuk"
+				Image: "https://source.unsplash.com/Oalh2MojUuk",
+				link: "/about"
 			},
 			{
 				Name: "Contact us",
-				Image: "https://source.unsplash.com/q3QPw37J6Xs"
+				Image: "https://source.unsplash.com/q3QPw37J6Xs",
+				link: "/contact"
 			}
 		]
 	}
 ]
 
+
+const handleClick = (e, id) => {
+
+}
 const Item = (props) => {
 	const classes = useStyles()
 
@@ -175,23 +180,24 @@ const Item = (props) => {
 	if (displayTitle) {
 		for (let i = 0; i < mediaLength; i++) {
 			const item = props.item.Items[i];
-
+			console.log(item.link)
 			const media = (
 				
 				<Grid item xs={12 / totalItems} key={item.Name}>
-					<Link underline='none' component={RouterLink} to={item.link}>
-					<CardMedia
-						className={classes.carouselItemMedia}
-						image={item.Image}
-						title={item.Name}	
-					>
-						<Typography className={classes.mediaCaption}>
-							{item.Name}
-						</Typography>
-					</CardMedia>
+					<Link href={item.link}>
+						<CardMedia
+							className={classes.carouselItemMedia}
+							image={item.Image}
+							title={item.Name}
+							
+						>
+							<Typography className={classes.mediaCaption}>
+								{item.Name}
+							</Typography>
+						</CardMedia>
 					</Link>
 				</Grid>
-				
+
 			)
 
 			items.push(media);
@@ -205,10 +211,6 @@ const Item = (props) => {
 					<Typography className={classes.carouselCaption}>
 						{props.item.Caption}
 					</Typography>
-
-					<Button variant="outlined" className={classes.carouselButton}>
-						View Now
-                </Button>
 				</CardContent>
 			</Grid>
 		)
@@ -226,15 +228,15 @@ const Item = (props) => {
 
 			const media = (
 				<Grid item xs={6} key={item.Name}>
-					<CardMedia
-						className={classes.carouselItemMedia}
-						image={item.Image}
-						title={item.Name}
-					>
-						<Typography className={classes.mediaCaption}>
-							{item.Name}
-						</Typography>
-					</CardMedia>
+							<CardMedia
+								className={classes.carouselItemMedia}
+								image={item.Image}
+								title={item.Name}
+							>
+								<Typography className={classes.mediaCaption}>
+									{item.Name}
+								</Typography>
+							</CardMedia>	
 				</Grid>
 			)
 

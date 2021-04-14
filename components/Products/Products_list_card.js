@@ -109,6 +109,7 @@ const Products_list_card = ({ products }) => {
 										>
 											<AddShoppingCartIcon />
 										</IconButton>
+										Price: {it.product_price} RON
 									</CardActions>
 								</Card>
 							</Link>

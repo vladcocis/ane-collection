@@ -46,12 +46,6 @@ export default function FloatingActionButtons() {
 				</Link>
 			</div>
 			<div className='icon__container'>
-				<Fab className={classes.fabColor1} color="primary" aria-label="call" href="tel:+447470718754">
-					<PhoneIcon />
-				</Fab>
-			</div>
-
-			<div className='icon__container'>
 				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
 					<FacebookIcon />
 				</Fab>

@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         padding: 0
     },
+    tableImageContainer:{
+
+    },
     appBar: {
         position: 'relative',
     },
@@ -124,8 +127,8 @@ const Row = ({ details, handleRowDelete }) => {
     const displayImages = () => {
         return _.map(images, (it, index) => {
             return (
-                <Grid item xs={3} key={index}>
-                    <img className={classes.tableImage} src={it.img} />
+                <Grid className={classes.tableImageContainer} item xs={6} key={index}>
+                    <img className={classes.tableImage} src={`/uploads/${it.img}`} />
                 </Grid>
             )
         })
@@ -245,8 +248,8 @@ const Row = ({ details, handleRowDelete }) => {
                                     label="Category"
                                     onChange={handleCategoryChange}
                                 >
-                                    <MenuItem value={1}>Handmade</MenuItem>
-                                    <MenuItem value={2}>Manufactured</MenuItem>
+                                    <MenuItem value={1}>Handmade Collection</MenuItem>
+                                    <MenuItem value={2}>Angel Collection</MenuItem>
                                 </Select>
                             </Grid>
                             <Grid item xs={12}>
@@ -310,7 +313,7 @@ const Row = ({ details, handleRowDelete }) => {
                                         return (
                                             <Grid item key={it.image_id}>
                                                 <Button onClick={(e, image_id) => handleImageDeleteClick(e, it.image_id)} variant="contained" className={classes.deleteImage}>x</Button>
-                                                <img src={it.img} />
+                                                <img src={`/uploads/${it.img}`} />
                                             </Grid>
                                         )
                                     })}

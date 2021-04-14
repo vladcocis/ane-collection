@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
     return (
         <>
             <Head>
-                <title>Ane Collection</title>
+                <title>Ane Collections</title>
             </Head>
 
             {router.pathname !== '/admin' ? <FloatingActionButton /> : null}

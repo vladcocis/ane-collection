@@ -84,6 +84,7 @@ const Product_info = ({ data_product }) => {
 
 
   _.map(images, (p) => { img.push(p.img); })
+  
 
   maxSteps = img.length
   return (
@@ -98,7 +99,7 @@ const Product_info = ({ data_product }) => {
             <center>
               <img
                 className={pclasses.imgcontainer}
-                src={img[activeStep]}
+                src={`/uploads/${img[activeStep]}`}
 
               />
             </center>

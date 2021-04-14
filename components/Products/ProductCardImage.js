@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from 'next/router'
 
 const ProductCardImage = ({ productId, productName}) => {
-	const [image, setImage] = React.useState("https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif");
+	const [image, setImage] = React.useState("placeholder.jpg");
 
 	const router = useRouter()
 
@@ -21,7 +21,7 @@ const ProductCardImage = ({ productId, productName}) => {
 					setImage(response.data.payload[0].img);
 				}
 			} catch (error) {
-				setImage('https://i.stack.imgur.com/y9DpT.jpg')
+				setImage("placeholder.jpg")
 				console.warn(`Image for product with ${productId} does not currently have an image.`)
 			}
 		}
@@ -41,7 +41,7 @@ const ProductCardImage = ({ productId, productName}) => {
 				height: 350,
 				paddingTop: "56.25%",
 			}}
-			image={image}
+			image={`/uploads/${image}`}
 			title={productName}
 		/>
 	);

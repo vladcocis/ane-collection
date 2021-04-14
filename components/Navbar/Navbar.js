@@ -27,8 +27,8 @@ import Divider from '@material-ui/core/Divider'
 const navLinks = [
 	{ label: 'Home', url: '/', icon: <HomeIcon style={{ fill: '#000' }} /> },
 	{ label: 'About', url: '/about', icon: <InfoIcon style={{ fill: '#000' }} /> },
-	{ label: 'Handmade', url: '/handmade', icon: <BrushIcon style={{ fill: '#000' }} /> },
-	{ label: 'Manufactured', url: '/products', icon: <BusinessCenterIcon style={{ fill: '#000' }} /> },
+	{ label: 'Handmade Collection', url: '/handmade', icon: <BrushIcon style={{ fill: '#000' }} /> },
+	{ label: 'Angel Collection', url: '/products', icon: <BusinessCenterIcon style={{ fill: '#000' }} /> },
 	{ label: 'Contact', url: '/contact', icon: <PhoneIcon style={{ fill: '#000' }} /> },
 	{ label: 'Admin', url: '/admin', icon: <SettingsApplicationsIcon style={{ fill: '#000' }} />, requiresAdmin: true },
 	{ label: 'Account', url: '/account', icon: <AccountCircleIcon style={{ fill: '#000' }} /> },

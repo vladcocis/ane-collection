@@ -42,12 +42,6 @@ const reducer = (state, action) => {
 
             currentCart = state.map((it) => {
                 if (it.id === productId) {
-                    //console.log(state.filter(it => it.amount !== 0), state)
-                    // if (entry.amount + changeAmount === 0) {
-                    //     //console.log(state.filter(it => it.amount !== 0), state)
-                    //     //return [...state.filter(it => it.amount !== 0)]
-                    // }
-
                     return {
                         ...it,
                         amount: entry.amount + changeAmount > 0 ? entry.amount + changeAmount : 0
@@ -71,6 +65,21 @@ const reducer = (state, action) => {
             }
 
             return [...state, ...items]
+
+        case 'REMOVE_PRODUCT':
+            const entryId = action.payload.productId
+
+            const newCart = state.filter((it) => {
+                console.log(it.id, entryId)
+                return it.id !== entryId
+            })
+            console.log(newCart)
+
+            console.log(localStorage.getItem('cart'), JSON.stringify(newCart))
+
+            //localStorage.setItem('cart', JSON.stringify(newCart))
+
+            return [...newCart]
     }
 }
 
@@ -89,9 +98,11 @@ export const withProducts = async () => {
 export const getProductsTotalCount = (items) => {
     let totalCount = 0
 
-    items.map(({ id, amount }) => {
-        totalCount += amount
-    })
+    if (items) {
+        items.map(({ id, amount }) => {
+            totalCount += amount
+        })
+    }
 
     return totalCount
 }

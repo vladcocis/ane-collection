@@ -54,6 +54,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 	drawerContainer: {
 		padding: theme.spacing(5)
+	},
+	closeIcon: {
+		cursor: 'pointer'
+	},
+	amountButton: {
+		padding: 0,
+		maxWidth: 40,
+		minWidth: 30,
+		marginRight: theme.spacing(2),
+		marginLeft: theme.spacing(2)
 	}
 }))
 
@@ -62,6 +72,8 @@ export default function FloatingActionButtons() {
 	const router = useRouter()
 
 	const { state: items } = useContext(CartContext)
+	const { dispatch } = useContext(CartContext)
+
 	const [products, setProducts] = useState([])
 	const [loaded, setLoaded] = useState(false)
 	const [open, setOpen] = useState(false)
@@ -95,6 +107,12 @@ export default function FloatingActionButtons() {
 		setOpen(false)
 	}
 
+	const handleRemove = (e, id) => {
+		e.preventDefault()
+
+		return dispatch({ type: 'REMOVE_PRODUCT',payload: { productId: id } })
+	}
+
 	const showProducts = () => {
 		return _.map(items, ({ id, amount }) => {
 			if (id && amount) {
@@ -102,9 +120,10 @@ export default function FloatingActionButtons() {
 
 				return (
 					<ListItem>
-						<Button>-</Button>
+						<Button className={classes.amountButton} variant="contained">-</Button>
 						<ListItemText primary={`${product.product_name} x ${amount}`} secondary={`${product.product_price} Lei`} />
-						<Button>+</Button>
+						<Button className={classes.amountButton} variant="contained">+</Button>
+						<Button onClick={(e) => handleRemove(e, id)} variant="contained">Remove</Button>
 					</ListItem>
 				)
 			}
@@ -114,8 +133,6 @@ export default function FloatingActionButtons() {
 	if (!totalCount) {
 		totalCount = 0
 	}
-
-	console.log(router.pathname)
 
 	return (
 		<div className='root'>
@@ -153,7 +170,7 @@ export default function FloatingActionButtons() {
 
 					<List>
 						{loaded ? showProducts() : <Loader />}
-						{loaded && !items.length ? <Typography component="h6" variant="h6">No products added.</Typography> : null}
+						{!totalCount ? <Typography component="h6" variant="h6">No products added.</Typography> : null}
 					</List>
 
 					<Link href="/cart">

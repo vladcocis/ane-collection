@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Fab from '@material-ui/core/Fab'
-import PhoneIcon from '@material-ui/icons/Phone'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { makeStyles } from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import Button from '@material-ui/core/Button'
+import Drawer from '@material-ui/core/Drawer'
 import Link from 'next/link'
 import { CartContext } from '../cart/CartProvider'
 import { getProductsTotalCount } from '../cart/CartProvider'
+import CloseIcon from '@material-ui/icons/Close'
+import { Typography } from '@material-ui/core'
 import axios from 'axios'
+import _ from 'lodash'
+import { ListItem, ListItemText, List } from '@material-ui/core'
+import Loader from '../../components/Loader'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
 	fabColor2: {
@@ -45,31 +51,83 @@ const useStyles = makeStyles((theme) => ({
 		zIndex: 12,
 		fontSize: 17,
 		borderRadius: 60
+	},
+	drawerContainer: {
+		padding: theme.spacing(5)
 	}
 }))
 
 export default function FloatingActionButtons() {
 	const classes = useStyles()
-	const { state: items } = React.useContext(CartContext)
+	const router = useRouter()
+
+	const { state: items } = useContext(CartContext)
+	const [products, setProducts] = useState([])
+	const [loaded, setLoaded] = useState(false)
+	const [open, setOpen] = useState(false)
+
 	let totalCount = getProductsTotalCount(items)
 
-	console.log(totalCount)
-	console.log(items)
+	useEffect(() => {
+		async function fetchProducts() {
+			if (!router.isReady) {
+				return
+			}
+
+			const response = await axios.get(`/api/cart/get-all-products`)
+
+			if (response.status === 200) {
+				setProducts(response.data.payload)
+				setLoaded(true)
+			}
+		}
+
+		fetchProducts()
+	}, [router.isReady])
+
+	const findProduct = (id) => products.find((p) => p.id === id)
+
+	const handleDrawerOpen = () => {
+		setOpen(true)
+	}
+
+	const handleDrawerClose = () => {
+		setOpen(false)
+	}
+
+	const showProducts = () => {
+		return _.map(items, ({ id, amount }) => {
+			if (id && amount) {
+				const product = findProduct(id)
+
+				return (
+					<ListItem>
+						<Button>-</Button>
+						<ListItemText primary={`${product.product_name} x ${amount}`} secondary={`${product.product_price} Lei`} />
+						<Button>+</Button>
+					</ListItem>
+				)
+			}
+		})
+	}
 
 	if (!totalCount) {
 		totalCount = 0
 	}
 
+	console.log(router.pathname)
+
 	return (
 		<div className='root'>
-			<div className='icon__container'>
-				<span className={classes.cartCount}>{totalCount}</span>
-				<Link href="/cart">
-					<Button className={classes.shoppingCartButton}>
+			{router.pathname !== '/cart' &&
+				<div className='icon__container'>
+					<span className={classes.cartCount}>{totalCount}</span>
+
+					<Button onClick={handleDrawerOpen} className={classes.shoppingCartButton}>
 						<ShoppingCartIcon />
 					</Button>
-				</Link>
-			</div>
+				</div>
+			}
 			<div className='icon__container'>
 				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
 					<FacebookIcon />
@@ -80,6 +138,30 @@ export default function FloatingActionButtons() {
 					<InstagramIcon />
 				</Fab>
 			</div>
+
+			<Drawer
+				{...{
+					anchor: 'right',
+					open: open,
+					onClose: handleDrawerClose,
+				}}
+			>
+				<div className={classes.drawerContainer}>
+					<CloseIcon className={classes.closeIcon} onClick={handleDrawerClose} />
+
+					<Typography variant="h5" component="h5">Shopping Cart</Typography>
+
+					<List>
+						{loaded ? showProducts() : <Loader />}
+						{loaded && !items.length ? <Typography component="h6" variant="h6">No products added.</Typography> : null}
+					</List>
+
+					<Link href="/cart">
+						<Button onClick={handleDrawerClose} variant="contained" color="primary">View Cart</Button>
+					</Link>
+
+				</div>
+			</Drawer>
 		</div>
 	)
 }

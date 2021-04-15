@@ -115,7 +115,7 @@ const CartProvider = ({ children }) => {
     React.useEffect(() => {
         if (localStorage.getItem('cart') !== undefined) {
             setStorageLoaded(true)
-            //localStorage.removeItem('cart')
+            // localStorage.removeItem('cart')
             dispatch({ type: "LOAD_FROM_LOCALSTORAGE", payload: JSON.parse(localStorage.getItem('cart')) })
         }
     }, [])

@@ -39,14 +39,14 @@ const reducer = (state, action) => {
             const changeAmount = action.payload.amount
 
             entry = state.find((it) => it.id === productId)
-            //localStorage.removeItem('cart')
 
             currentCart = state.map((it) => {
                 if (it.id === productId) {
-                    if (entry.amount + changeAmount === 0) {
-                        console.log(state)
-                        return [...state.filter(it => it.amount !== 0)]
-                    }
+                    //console.log(state.filter(it => it.amount !== 0), state)
+                    // if (entry.amount + changeAmount === 0) {
+                    //     //console.log(state.filter(it => it.amount !== 0), state)
+                    //     //return [...state.filter(it => it.amount !== 0)]
+                    // }
 
                     return {
                         ...it,
@@ -61,7 +61,7 @@ const reducer = (state, action) => {
                 localStorage.setItem('cart', JSON.stringify(currentCart))
             }
 
-            return currentCart
+            return [...currentCart]
 
         case 'LOAD_FROM_LOCALSTORAGE':
             const items = action.payload
@@ -115,7 +115,7 @@ const CartProvider = ({ children }) => {
     React.useEffect(() => {
         if (localStorage.getItem('cart') !== undefined) {
             setStorageLoaded(true)
-            // localStorage.removeItem('cart')
+            //localStorage.removeItem('cart')
             dispatch({ type: "LOAD_FROM_LOCALSTORAGE", payload: JSON.parse(localStorage.getItem('cart')) })
         }
     }, [])

@@ -69,7 +69,7 @@ const Product_comment_add = ({ productId_comment }) => {
 
 	return (
 		<List>
-			<h3 className={classes.header}>New Comment</h3>
+			<h3 className={classes.header}>New Review</h3>
 
 			<ListItem alignItems="flex-start" className={classes.comment_add}>
 				<ListItemAvatar>
@@ -128,7 +128,7 @@ const Product_comment_add = ({ productId_comment }) => {
 										variant="contained"
 										color="primary"
 									>
-										Add Comment
+										Add Review
         							</Button>
 								</Grid>
 							</form>

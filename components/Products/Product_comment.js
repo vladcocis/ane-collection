@@ -65,7 +65,7 @@ const Product_comment = ({ comments }) => {
 			<CssBaseline />
 
 			<List className={classes.root}>
-				<h1 className={classes.header} >Comments</h1>
+				<h1 className={classes.header} >Reviews</h1>
 				{_.map(comment, (c) => {
 					return (
 						<ListItem alignItems="flex-start" key={c.id}>

@@ -19,6 +19,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Select from '@material-ui/core/Select';
 import { useRouter } from 'next/router';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         padding: 0
     },
-    tableImageContainer:{
+    tableImageContainer: {
 
     },
     appBar: {
@@ -82,6 +86,7 @@ const Row = ({ details, handleRowDelete }) => {
     const classes = useStyles()
     const [images, setImages] = useState([])
     const [loaded, setLoaded] = useState(false)
+    const [open, setOpen] = React.useState(false);
 
     const [edit, setEdit] = useState(false)
 
@@ -189,12 +194,18 @@ const Row = ({ details, handleRowDelete }) => {
     const handlePriceChange = (e) => {
         setPrice(e.target.value)
     }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
+    const handlePopupClose = () => {
+        setOpen(false);
+    };
     return (
         <StyledTableRow key={details.product_id}>
             <StyledTableCell align="center">{details.product_name}</StyledTableCell>
             <StyledTableCell align="center">{details.category_name}</StyledTableCell>
-            <StyledTableCell className={classes.tableDescription} align="center">{details.product_desc}</StyledTableCell>
+            <StyledTableCell className={classes.tableDescription} align="left">{details.product_desc}</StyledTableCell>
             <StyledTableCell align="center">{details.product_price}</StyledTableCell>
             <StyledTableCell align="center">{details.stock}</StyledTableCell>
 
@@ -205,7 +216,32 @@ const Row = ({ details, handleRowDelete }) => {
 
             <StyledTableCell>
                 <Button onClick={(e, id) => handleEditClick(e, details.product_id)}><CreateIcon /></Button>
-                <Button onClick={(e, id) => handleRowDelete(e, details.product_id)}><DeleteIcon /></Button>
+                <Button onClick={handleClickOpen}>
+                    <DeleteIcon />
+                </Button>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle id="alert-dialog-slide-title">{"Are you sure you want to delete this product?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            This will delete all information about the product, including images.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handlePopupClose}>
+                            No
+                            </Button>
+                        <Button onClick={(e, id) => handleRowDelete(e, details.product_id)}>
+                            Yes
+                            </Button>
+                    </DialogActions>
+                </Dialog>
             </StyledTableCell>
 
             <Dialog fullScreen open={edit} onClose={handleClose} TransitionComponent={Transition}>

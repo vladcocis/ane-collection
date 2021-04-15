@@ -53,7 +53,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const useStyles = makeStyles(theme => ({
     table: {
         minWidth: 700,
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     TableContainer: {
         marginTop: theme.spacing(10)

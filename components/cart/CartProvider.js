@@ -1,6 +1,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import React, { createContext, useReducer } from 'react'
+import Loader from '../Loader'
 
 let initialState = []
 
@@ -21,9 +22,6 @@ const reducer = (state, action) => {
                     }
                     return it
                 })
-
-                // emergency localStorage eraser for development purposes only
-                // localStorage.removeItem('cart')
 
                 if (JSON.parse(localStorage.getItem('cart')) !== currentCart && currentCart.length) {
                     localStorage.setItem('cart', JSON.stringify(currentCart))
@@ -70,14 +68,10 @@ const reducer = (state, action) => {
             const entryId = action.payload.productId
 
             const newCart = state.filter((it) => {
-                console.log(it.id, entryId)
                 return it.id !== entryId
             })
-            console.log(newCart)
 
-            console.log(localStorage.getItem('cart'), JSON.stringify(newCart))
-
-            //localStorage.setItem('cart', JSON.stringify(newCart))
+            localStorage.setItem('cart', JSON.stringify(newCart))
 
             return [...newCart]
     }
@@ -138,7 +132,7 @@ const CartProvider = ({ children }) => {
             </CartContext.Provider>
         )
     } else {
-        return 'Fetching...'
+        return <Loader />
     }
 }
 

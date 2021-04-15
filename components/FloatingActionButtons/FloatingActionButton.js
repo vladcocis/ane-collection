@@ -113,16 +113,29 @@ export default function FloatingActionButtons() {
 		return dispatch({ type: 'REMOVE_PRODUCT',payload: { productId: id } })
 	}
 
+	const handleDecrement = (e, productId) => {
+		e.preventDefault()
+
+		return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: -1 } })
+	}
+
+	const handleIncrement = (e, productId) => {
+		e.preventDefault()
+
+		return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: 1 } })
+	}
+
 	const showProducts = () => {
 		return _.map(items, ({ id, amount }) => {
 			if (id && amount) {
 				const product = findProduct(id)
 
 				return (
-					<ListItem>
-						<Button className={classes.amountButton} variant="contained">-</Button>
+					<ListItem key={id}>
+						<Button onClick={(e) => handleDecrement(e, id)} className={classes.amountButton} variant="contained">-</Button>
 						<ListItemText primary={`${product.product_name} x ${amount}`} secondary={`${product.product_price} Lei`} />
-						<Button className={classes.amountButton} variant="contained">+</Button>
+						<Button onClick={(e) => handleIncrement(e, id)} className={classes.amountButton} variant="contained">+</Button>
+
 						<Button onClick={(e) => handleRemove(e, id)} variant="contained">Remove</Button>
 					</ListItem>
 				)

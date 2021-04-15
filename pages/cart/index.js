@@ -64,15 +64,11 @@ const CartPage = () => {
     const handleIncrementClick = (e, productId) => {
         e.preventDefault()
 
-        console.log(productId)
-
         return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: 1 } })
     }
 
     const handleDecrementClick = (e, productId) => {
         e.preventDefault()
-
-        console.log(productId)
 
         return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: -1 } })
     }

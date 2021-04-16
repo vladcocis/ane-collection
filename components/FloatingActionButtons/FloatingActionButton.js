@@ -110,7 +110,7 @@ export default function FloatingActionButtons() {
 	const handleRemove = (e, id) => {
 		e.preventDefault()
 
-		return dispatch({ type: 'REMOVE_PRODUCT',payload: { productId: id } })
+		return dispatch({ type: 'REMOVE_PRODUCT', payload: { productId: id } })
 	}
 
 	const handleDecrement = (e, productId) => {
@@ -149,7 +149,7 @@ export default function FloatingActionButtons() {
 
 	return (
 		<div className='root'>
-			{router.pathname !== '/cart' &&
+			{(router.pathname !== '/cart' && router.pathname !== '/cart/checkout') &&
 				<div className='icon__container'>
 					<span className={classes.cartCount}>{totalCount}</span>
 

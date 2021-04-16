@@ -73,6 +73,12 @@ const CartPage = () => {
         return dispatch({ type: 'ADJUST_AMOUNT', payload: { productId, amount: -1 } })
     }
 
+    const handleRemove = (e, productId) => {
+        e.preventDefault()
+
+        return dispatch({ type: 'REMOVE_PRODUCT', payload: { productId } })
+    }
+
     return loaded ? (
         <div style={{ padding: '5rem' }}>
             <Typography component="h2" variant="h2">Shopping Cart</Typography>
@@ -103,12 +109,17 @@ const CartPage = () => {
 
                                 return (
                                     <TableRow key={id}>
-                                        <TableCell>{product.product_name}</TableCell>
+                                        <TableCell>
+                                            {product.product_name}
+                                            <Button onClick={(e) => handleRemove(e, id)} className={classes.amountButton} variant="outlined">x</Button>
+                                        </TableCell>
+
                                         <TableCell align="right">
                                             <Button onClick={(e) => handleDecrementClick(e, id)} className={classes.amountButton} variant="outlined">-</Button>
                                             {amount}
                                             <Button onClick={(e) => handleIncrementClick(e, id)} className={classes.amountButton} variant="outlined">+</Button>
                                         </TableCell>
+
                                         <TableCell align="right">{product.product_price}</TableCell>
                                         <TableCell align="right">{finalPrice}</TableCell>
                                     </TableRow>

@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
                 <title>Ane Collections</title>
             </Head>
 
-            {router.pathname !== '/admin' ? <FloatingActionButton /> : null}
+           {router.pathname !== '/admin' ? <FloatingActionButton /> : null}
 
             <Navbar />
 

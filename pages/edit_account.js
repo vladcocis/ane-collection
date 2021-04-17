@@ -7,7 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '750px',
+      width: '100%',
+    minHeight: '750px',
 		marginTop: theme.spacing(8),
 		display: 'flex',
 		flexDirection: 'column',
@@ -47,7 +48,6 @@ const edit_account =() =>{
       }
 
     return(
-        <div>
             <div  className={classes.root}>
         
             <h1 > You can edit your account details here</h1>
@@ -55,7 +55,6 @@ const edit_account =() =>{
             <AccountAddress/>
             
             </div>
-    </div>
     )
 }
 

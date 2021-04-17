@@ -21,7 +21,7 @@ const edit_account =() =>{
             if (response.status === 200) {
               setData(response.data.payload);
               setIsLoading(true)
-              //console.log(response.data.payload)
+              console.log(response.data.payload)
             }
           }
           fetchAccountAddress()

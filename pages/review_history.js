@@ -35,15 +35,22 @@ const edit_account =() =>{
             if (response.status === 200) {
               setData(response.data.payload);
               setIsLoading(true)
-              console.log(response.data.payload)
+              console.log(response.data.payload.length)
             }
           }
           fetchAccountReviews()
       },[user]);
 
       const displayAccountReviews = () => {
+        if(data.length == 0){
+          return(
+            <p><b>You do not currently have any reviews  ☹.</b>
+            <br/><b> If you wish to submit a review, navigate to a product's page and fill out the review form details.</b></p>
+          )
+        }else {
           return data.map((details,i) => (<AccountReviewsRow key={i} details={details}/>))
       }
+    }
 
     return(
         <div className={classes.root}>

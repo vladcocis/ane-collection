@@ -1,29 +1,37 @@
 import React, {useState} from "react"
 import Expire from "./Expire";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
+import Container from '@material-ui/core/Container';
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        width: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-        padding: '5px',
+        padding: '10px',
     },
     container: {
+        //background:'blue',
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
         padding: '5px',
     },
     button: {
-		marginTop:'16px',
+		marginTop:'10px',
     },
+    form: {
+		width: '100%', // Fix IE 11 issue.
+		marginTop: theme.spacing(3),
+	},
   }));
 
 export default function EditAccountDetails({details}) {
@@ -31,8 +39,8 @@ export default function EditAccountDetails({details}) {
 
     const [name,setName] = useState(details.name);
     const [email,setEmail] = useState(details.email);
-    const [nameHelper, setNameHelper] = useState('');
-    const [emailHelper, setEmailHelper] = useState('');
+    const [nameHelper, setNameHelper] = useState(' ');
+    const [emailHelper, setEmailHelper] = useState(' ');
     const [errorMsg, setErrorMsg] = useState("");
     const [edit,setEdit] = useState(false);
 
@@ -63,11 +71,10 @@ export default function EditAccountDetails({details}) {
         switch (event.target.name) {
             case 'name': {
                 setName(value);
-                console.log(name)
                 if (name.length < 5) {
                     setNameHelper('First name must be at least 5 characters long');
                 } else {
-                    setNameHelper('');
+                    setNameHelper(' ');
                 }
                 break;
             }
@@ -77,7 +84,7 @@ export default function EditAccountDetails({details}) {
                 if (!valid) {
                     setEmailHelper('Invalid Email. Format must be like :abcd@hotmail.com');
                 } else {
-                    setEmailHelper('');
+                    setEmailHelper(' ');
                 }
                 break;
             }
@@ -105,17 +112,17 @@ export default function EditAccountDetails({details}) {
                     variant="contained" 
                     color="secondary" 
                     onClick={actionEditAccount}
-                    disabled={nameHelper.length !== 0 || emailHelper.length!== 0}
+                    disabled={nameHelper.length > 1 || emailHelper.length > 1 || name.length == 0}
                     startIcon={<SaveIcon/>}>Save</Button>
 		)
 	}
 
 
   return (
-    <div>
-        <div className={classes.root}>
-           <form className={classes.root} noValidate autoComplete="off" onSubmit={actionEditAccount}>
-           <Grid container spacing={2} className={classes.container}>
+    <Container  className={classes.root}>
+        <CssBaseline />
+           <form className={classes.root} noValidate autoComplete="off" >
+           <Grid container spacing={2} className={classes.container} >
            <Grid item xs={12} sm={6}>
             <TextField 
                     fullWidth
@@ -128,11 +135,12 @@ export default function EditAccountDetails({details}) {
                     onChange={valueChangeHandler}
                     disabled={!edit}
                     helperText={nameHelper}
-					error={nameHelper.trim().length !== 0}
+					error={nameHelper.trim().length !== 0 || name.length == 0}
                     ></TextField>
                     </Grid>
-            <Grid>
+            <Grid item xs={12} sm={6}>
             <TextField  
+                    fullWidth
                     id="outlined-basic" 
                     label="Email" 
                     variant="outlined"
@@ -148,10 +156,8 @@ export default function EditAccountDetails({details}) {
                     </Grid>
                     {errorMsg.length>0 && <Expire delay="5000">{errorMsg}</Expire>  }
                     {edit? getSaveButton() : getEditButton()}
-                    </form>
-                    
-        </div>
-    </div>
+                    </form>  
+    </Container>
   );
 };
 

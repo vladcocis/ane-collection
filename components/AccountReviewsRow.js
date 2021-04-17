@@ -2,23 +2,27 @@ import React, {useState, useEffect} from "react"
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import ReviewImage from "./ReviewImage";
-import Divider from '@material-ui/core/Divider';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
-        height: '350px',
+        minHeight: '350px',
         marginTop: '1em',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         alignContent: 'center',
         border: 'thin',
-        borderRadius: '2.5em',
-        boxShadow: '0 0  15px #a1dafc'
+        boxShadow: '0 0  15px #cccccc',
+        '@media(max-width: 570px)' : {
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+          },
     },
     img_container: {
-        height:'100%',
+        height:'350px',
+        minHeight:'100%',
         width: '50%',
+        minWidth: '50%',
     },
   }));
 

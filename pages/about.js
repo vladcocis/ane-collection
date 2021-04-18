@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
               },
     },
     img_container: {
-        height: '100%',
-        width: '50%', 
-        //background: 'green',
+            height: '100%',
+            width: '50%', 
+            //background: 'green',
         '& img': {
             width: '100%',
             height: '100%',
             borderRadius: '50px 0 0 50px', 
             border: 'thin',
-        boxShadow: '0 0  15px #85837A',
+            boxShadow: '0 0  15px #85837A',
         },
         
         '@media(max-width: 1115px)' : {
@@ -55,9 +54,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '80px',
         '& h1': {
         textAlign: 'center',
-        
             },
-            
         '@media(max-width: 1115px)' : {
             width: '100%',
             padding: '0',

@@ -6,6 +6,10 @@ import _ from 'lodash'
 import React from 'react'
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import HomeDetails from '../components/HomeDetails'
+import CollectionDetails from '../components/CollectionDetails'
+import Testimonials from '../components/Testimonials'
+import Divider from '@material-ui/core/Divider';
 
 import {
 	Card,
@@ -267,10 +271,17 @@ const Home = () => {
 					return <Item key={index} item={it} />
 				})}
 			</Carousel>
-
+			<HomeDetails/>
+			<CollectionDetails />
+			<Typography align='center' gutterBottom variant="h4" component="h2">
+            Learn what our customers think about us
+          </Typography>
+		  <Divider />
+			<Testimonials />
+{/*
 			<Grid container component="main">
 				<Grid className={classes.imageGrid} item xs={6}></Grid>
-
+				
 				<Grid className={classes.gridTextContent} item xs={6} elevation={12} component={Paper}>
 					<Typography component="h1" variant="h5">
 						PLACEHOLDER TITLE
@@ -280,6 +291,7 @@ const Home = () => {
 					</Typography>
 				</Grid>
 			</Grid>
+*/}
 		</div>
 	)
 }

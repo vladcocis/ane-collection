@@ -9,7 +9,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Expire from "./Expire";
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+	},
+	error:{
+	  color: 'red',
 	},
 }));
 
@@ -134,7 +136,7 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Sign up
 				</Typography>
-				{errorMsg.length>0 && <Expire delay="10000"><b>{errorMsg}</b></Expire>  }
+				{errorMsg.length>0 && <div className={classes.error}><b>{errorMsg}</b></div>  }
 				<form className={classes.form} onSubmit={actionSignup} noValidate>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
@@ -202,7 +204,7 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-							autoComplete= "off" 
+								autoComplete= "off" 
 								variant="outlined"
 								required
 								fullWidth
@@ -224,7 +226,13 @@ export default function SignUp() {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
-						disabled={firstNameHelper.length !== 0 || lastNameHelper.length !== 0 || usernameHelper.length !== 0 || emailHelper.length !== 0 || passwordHelper.length !== 0}
+						disabled={
+							firstNameHelper.length !== 0 || firstName.length == 0 ||
+							lastNameHelper.length !== 0 || lastName.length == 0 ||
+							usernameHelper.length !== 0 || firstName.length == 0 ||
+							emailHelper.length !== 0 ||  username.length == 0 ||
+							passwordHelper.length !== 0 ||  password.length == 0
+						}
 					>
 						Sign Up
 					</Button>

@@ -18,11 +18,16 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(6),
     },
     root: {
+      margin:'10em',
         marginTop: theme.spacing(10),
         height: 800,
 		  display: 'flex',
 		  flexDirection: 'column',
 		  alignItems: 'center',
+      '@media(max-width: 1115px)' : {
+        margin: '1em',
+        marginTop: theme.spacing(10),
+          },
       },
       button: {
         marginTop: '1em',

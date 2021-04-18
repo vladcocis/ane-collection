@@ -16,6 +16,7 @@
     "emailjs-com": "^2.6.4",
     "formidable": "^1.2.2",
     "lodash": "^4.17.21",
+    "material-testimonial-card": "0.0.3",
     "mv": "^2.1.1",
     "mysql": "^2.18.1",
     "next": "10.0.6",

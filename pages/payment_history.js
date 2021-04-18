@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import useUser from "../lib/useUser";
 import axios from "axios";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,17 +10,25 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 700,
+      marginTop: theme.spacing(6),
     },
     root: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(10),
         height: 800,
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
+		  display: 'flex',
+		  flexDirection: 'column',
+		  alignItems: 'center',
+      },
+      button: {
+        marginTop: '1em',
+      },
+      h1: {
+        marginTop: '2em', 
       },
   }));
 
@@ -68,11 +77,22 @@ const edit_account =() =>{
       },[user]);
 
       const displayAccountPayments = () => {
+        if(data.length == 0){
+          return(
+            <div>
+              <Typography className={classes.h1} component="h1" component="h1" variant="h6" align='center'>
+              No payments were found for this account. New payments are added when you make an order.
+				    </Typography>
+            <Button fullWidth href='/account' variant="contained" color="primary" className={classes.button}><b>Back to account</b></Button>
+            </div>
+          )
+        }else {
           return <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="table">
+          <caption>Payment table that displays all past payments</caption>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell>Transaction Date</StyledTableCell>
+                <StyledTableCell headers='Transaction date'>Transaction Date</StyledTableCell>
                 <StyledTableCell align="right">Total Amount</StyledTableCell>
                 <StyledTableCell align="right">Payment Method</StyledTableCell>
                 <StyledTableCell align="right">Invoice</StyledTableCell>
@@ -93,11 +113,14 @@ const edit_account =() =>{
           </Table>
         </TableContainer>
       }
+    }
 
     return(
         <React.Fragment>
             <div className={classes.root}>
-            <h1 > You can see your payment history here</h1>
+            <Typography component="h1" variant="h4" align='center'>
+            You can see your payment history here
+				    </Typography>
             {isLoading ? displayAccountPayments() : <p></p>}
             
             </div>

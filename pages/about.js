@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     img_container: {
         height: '100%',
-        width: '50%',
+        width: '50%', 
         //background: 'green',
         '& img': {
             width: '100%',
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
         
         '@media(max-width: 1115px)' : {
             width: '100%',
+            order: '1',
               },
     },
     

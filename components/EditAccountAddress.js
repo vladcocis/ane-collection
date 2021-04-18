@@ -164,11 +164,11 @@ export default function EditAccountDetails({details}) {
            
            <Grid item xs={12} sm={6}>
             <TextField 
+                    autoComplete= "off"
                     fullWidth
                     id="outlined-basic" 
                     label="Address1" 
                     variant="outlined" 
-                    type="address1"
                     name="address1"
                     defaultValue={details.address1}
                     onChange={valueChangeHandler}
@@ -183,7 +183,6 @@ export default function EditAccountDetails({details}) {
                     id="outlined-basic" 
                     label="Address2" 
                     variant="outlined" 
-                    type="address2"
                     name="address2"
                     defaultValue={details.address2}
                     onChange={valueChangeHandler}
@@ -197,8 +196,7 @@ export default function EditAccountDetails({details}) {
                     fullWidth
                     id="outlined-basic" 
                     label="City" 
-                    variant="outlined" 
-                    type="city"
+                    variant="outlined"
                     name="city"
                     defaultValue={details.city}
                     onChange={valueChangeHandler}
@@ -212,8 +210,7 @@ export default function EditAccountDetails({details}) {
                     fullWidth
                     id="outlined-basic" 
                     label="County" 
-                    variant="outlined" 
-                    type="county"
+                    variant="outlined"
                     name="county"
                     defaultValue={details.county}
                     onChange={valueChangeHandler}
@@ -228,8 +225,7 @@ export default function EditAccountDetails({details}) {
                     fullWidth
                     id="outlined-basic" 
                     label="Postcode" 
-                    variant="outlined" 
-                    type="postcode"
+                    variant="outlined"
                     name="postcode"
                     defaultValue={details.postcode}
                     onChange={valueChangeHandler}

@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+
+
 export default function SignUp() {
 	const classes = useStyles();
 
@@ -133,11 +135,13 @@ export default function SignUp() {
 					Sign up
 				</Typography>
 				{errorMsg.length>0 && <Expire delay="10000"><b>{errorMsg}</b></Expire>  }
-				<form className={classes.form} onSubmit={actionSignup}>
+				<form className={classes.form} onSubmit={actionSignup} noValidate>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								autoComplete="fname"
+								inputProps={{
+									autoComplete: 'none',
+								}}
 								name="firstName"
 								variant="outlined"
 								required
@@ -152,6 +156,9 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
+								inputProps={{
+									autoComplete: 'none',
+								}}
 								onChange={valueChangeHandler}
 								variant="outlined"
 								required
@@ -159,20 +166,21 @@ export default function SignUp() {
 								id="lastName"
 								label="Last Name"
 								name="lastName"
-								autoComplete="lname"
 								helperText={lastNameHelper}
 								error={lastNameHelper.trim().length !== 0}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+								inputProps={{
+									autoComplete: 'none',
+								}}
 								variant="outlined"
 								required
 								fullWidth
 								id="username"
 								label="Username"
 								name="username"
-								autoComplete="username"
 								onChange={valueChangeHandler}
 								helperText={usernameHelper}
 								error={usernameHelper.trim().length !== 0}
@@ -180,13 +188,13 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+								autoComplete= "off" 
 								variant="outlined"
 								required
 								fullWidth
 								id="email"
 								label="Email Address"
 								name="email"
-								autoComplete="email"
 								onChange={valueChangeHandler}
 								helperText={emailHelper}
 								error={emailHelper.trim().length !== 0}
@@ -194,14 +202,13 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+							autoComplete= "off" 
 								variant="outlined"
 								required
 								fullWidth
 								name="password"
 								label="Password"
-								type="password"
 								id="password"
-								autoComplete="current-password"
 								onChange={valueChangeHandler}
 								helperText={passwordHelper}
 								error={passwordHelper.trim().length !== 0}

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import EditAccountAddress from "./EditAccountAddress";
+import Typography from '@material-ui/core/Typography';
 import useUser from "../lib/useUser";
 import axios from "axios";
 
@@ -28,14 +29,25 @@ const edit_account =() =>{
       },[user]);
 
       const displayAccountAddress = () => {
+        if(data.length == 0){
+          return(
+            <div>
+              <Typography component="h1" variant="h6" align='center'>
+              No addresses were found for this account.<br></br> If you wish to add an address, you can do so when purchasing an item.
+				    </Typography>
+            </div>
+          )
+        }else {
         return data.map((details,i) => (<EditAccountAddress key={i} details={details}/>))
+        }
     }
 
     return(
         <React.Fragment>
             <div >
-        
-            <h1 > You can edit your addresses details here</h1>
+            <Typography component="h1" variant="h4" align='center'>
+            You can edit your addresses details here
+				</Typography>
             {isLoading ? displayAccountAddress() : <p></p>}
    
             

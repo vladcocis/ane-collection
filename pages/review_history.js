@@ -3,6 +3,7 @@ import AccountReviewsRow from "../components/AccountReviewsRow";
 import useUser from "../lib/useUser";
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
     padding: '1em',
     display: 'flex',
     flexDirection: 'column',
-    }
+    },
+    h1: {
+      marginTop: '2em', 
+    },
   }));
 
 
@@ -44,8 +48,11 @@ const edit_account =() =>{
       const displayAccountReviews = () => {
         if(data.length == 0){
           return(
-            <p><b>You do not currently have any reviews  ☹.</b>
-            <br/><b> If you wish to submit a review, navigate to a product's page and fill out the review form details.</b></p>
+            <div>
+               <Typography className={classes.h1} component="h1" variant="h6" align='center'>
+               You do not currently have any reviews.<br></br> If you wish to submit a review, navigate to a product's page and fill out the review form details.
+				    </Typography>
+            </div>
           )
         }else {
           return data.map((details,i) => (<AccountReviewsRow key={i} details={details}/>))
@@ -54,8 +61,9 @@ const edit_account =() =>{
 
     return(
         <div className={classes.root}>
-           
-            <h1 > You take a look at all of your past reviews on this page.</h1>
+          <Typography component="h1" variant="h4" align='center'>
+          You take a look at all of your past reviews on this page.
+				    </Typography>
             {isLoading ? displayAccountReviews() : <p></p>}
             
     </div>

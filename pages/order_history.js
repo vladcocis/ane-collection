@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import useUser from "../lib/useUser";
 import axios from "axios";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,18 +10,26 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 700,
     },
     root: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(10),
         height: 800,
         margin: '10px',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+      },
+      button: {
+        marginTop: '1em',
+        marginBottom: '1em',
+      },
+      h1: {
+        marginTop: '2em', 
       },
   }));
 
@@ -69,8 +78,24 @@ const edit_account =() =>{
       },[user]);
 
       const displayAccountOrders = () => {
+        if(data.length == 0){
+          return(
+            <div>
+            <Typography className={classes.h1} component="h1" component="h1" variant="h6" align='center'>
+            No orders were found for this account.
+				    </Typography>
+            <Button fullWidth href='/account' variant="contained" color="primary" className={classes.button}><b>Back to account</b></Button><br></br>
+            <Typography component="h1" variant="h6" align='center'>
+            or
+				    </Typography>
+            <Button fullWidth href='/handmade' variant="contained" color="primary" className={classes.button}><b>Shop handmade collection</b></Button>
+            <Button fullWidth href='/products' variant="contained" color="primary" className={classes.button}><b>Shop angel collection</b></Button>
+            </div>
+          )
+        }else {
           return <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="table">
+          <caption>Order table that displays all past orders</caption>
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>Client Name</StyledTableCell>
@@ -106,11 +131,14 @@ const edit_account =() =>{
           </Table>
         </TableContainer>
       }
+    }
 
     return(
         <React.Fragment>
             <div className={classes.root}>
-            <h1 > You can see your orders here</h1>
+            <Typography component="h1" variant="h4" align='center'>
+            You can see your orders here
+				    </Typography>
             {isLoading ? displayAccountOrders() : <p></p>}
             
             </div>

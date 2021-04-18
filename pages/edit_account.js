@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import Typography from '@material-ui/core/Typography';
 import useUser from "../lib/useUser";
 import axios from "axios";
 import EditAccountDetails from "../components/EditAccountDetails";
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
     minHeight: '750px',
-		marginTop: theme.spacing(8),
+		marginTop: theme.spacing(10),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
@@ -49,8 +50,9 @@ const edit_account =() =>{
 
     return(
             <div  className={classes.root}>
-        
-            <h1 > You can edit your account details here</h1>
+              <Typography component="h1" variant="h4" align='center'>
+              You can edit your account details here
+				    </Typography>
             {isLoading ? displayAccountDetails() : <p></p>}
             <AccountAddress/>
             

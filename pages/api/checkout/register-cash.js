@@ -2,10 +2,8 @@ import executeQuery from '../../../lib/db'
 import _ from 'lodash'
 import moment from 'moment'
 import { generateInvoice } from '../../../components/checkout/GenerateInvoice'
-import withSession from '../../../lib/session'
 import { sendMail } from '../../../components/checkout/Mailing'
-
-const stripe = require('stripe')('sk_test_51HLFOaDfku0lGfVqZpmhcnUhCzlZC4QhE6N3CtlQD9FHQal15vEypkgC0nD5uVco14jwTfMcFxiE1zWLRiwP5ctx003d05yPwf');
+import withSession from '../../../lib/session'
 
 export default withSession(async (req, res) => {
     if (req.method === 'GET') {
@@ -18,36 +16,14 @@ export default withSession(async (req, res) => {
     const { final_products } = req.body
     const dateTime = moment().format('DD-MM-yyyy | HH:mm')
 
-    const [invoiceName, total] = generateInvoice(name, email, phone, address1, address2, city, county, zip, 'CARD', dateTime, final_products)
-
     const entryId = '_' + Math.random().toString(36).substr(2, 30)
-    const alpha_object_data = []
 
-    _.map(final_products, (it) => {
-        alpha_object_data.push({
-            price_data: {
-                currency: 'ron',
-                product_data: {
-                    name: it.product_name,
-                },
-                unit_amount: it.product_price * 100
-            },
-            quantity: it.amount
-        })
-    })
+    const [invoiceName, total] = generateInvoice(name, email, phone, address1, address2, city, county, zip, 'CASH', dateTime, final_products)
 
     try {
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: alpha_object_data,
-            mode: 'payment',
-            success_url: `http://localhost:3000/cart/validate/${entryId}`,
-            cancel_url: `http://localhost:3000/cart/error`,
-        })
-
-        const insert_response = await executeQuery({
+         const insert_response = await executeQuery({
             query: `INSERT INTO user_orders (id, client_name, email, address1, address2, city, county, phone, payment_method, order_status, date_time, user_id)
-                VALUES ('${entryId}', '${name}', '${email}', '${address1}, ${zip ?? ''}', '${address2 ?? 'N/A'}', '${city}', '${county}', '${phone}', 'CARD', '0', '${dateTime}', '${user.id ?? '-1'}')`
+                VALUES ('${entryId}', '${name}', '${email}', '${address1}, ${zip ?? ''}', '${address2 ?? 'N/A'}', '${city}', '${county}', '${phone}', 'CARD', '1', '${dateTime}', '${user.id ?? '-1'}')`
         })
 
         const insert_payment_response = await executeQuery({
@@ -55,22 +31,22 @@ export default withSession(async (req, res) => {
                 VALUES (null, '${user.id ?? '-1'}', '${dateTime}', '${total}', 'CASH', '${invoiceName}')`
         })
 
-        if (insert_payment_response.error) {
-            console.error(insert_payment_response.error)
-
-            await executeQuery({
-                query: `DELETE FROM user_payments WHERE invoice='${invoiceName}'`
-            })
+        if (insert_response.error) {
+            console.error(insert_response.error)
 
             await executeQuery({
                 query: `DELETE FROM user_orders WHERE id='${entryId}'`
             })
 
+            await executeQuery({
+                query: `DELETE FROM user_payments WHERE invoice='${invoiceName}'`
+            })
+
             return res.status(500).json({ status: 500, payload: 'Internal server error.' })
         }
 
-        if (insert_response.error) {
-            console.error(insert_response.error)
+        if (insert_payment_response.error) {
+            console.error(insert_payment_response.error)
 
             await executeQuery({
                 query: `DELETE FROM user_payments WHERE invoice='${invoiceName}'`
@@ -89,7 +65,7 @@ export default withSession(async (req, res) => {
             console.error(error)
         }
 
-        return res.status(200).json({ status: 200, payload: { id: session.id } })
+        return res.status(200).json({ status: 200, payload: 'Order OK' })
     } catch (error) {
         console.error(error)
 
@@ -103,5 +79,4 @@ export default withSession(async (req, res) => {
 
         return res.status(500).json({ status: 500, payload: 'Internal server error.' })
     }
-
 })

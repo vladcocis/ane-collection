@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { CartContext } from '../../components/cart/CartProvider'
+import { CartContext, getProductsTotalCount } from '../../components/cart/CartProvider'
 import _ from 'lodash'
 import Loader from '../../components/Loader'
 import { makeStyles } from '@material-ui/core/styles'
@@ -44,6 +44,7 @@ const CartPage = () => {
     const [loaded, setLoaded] = useState(false)
 
     let totalPrice = 0
+    let totalCount = getProductsTotalCount(items)
     const findProduct = (id) => products.find((p) => p.id === id)
 
     const classes = useStyles();
@@ -135,9 +136,11 @@ const CartPage = () => {
                 </Table>
             </TableContainer>
 
-            <Link href="/cart/checkout">
-                <Button variant="contained">Checkout</Button>
-            </Link>
+            {totalCount !== 0 ?
+                <Link href="/cart/checkout">
+                    <Button variant="contained">Checkout</Button>
+                </Link> : <Typography component="h4" variant="h4">Looks like your cart is empty. To proceed, select products from the store!</Typography>
+            }
         </div>
     ) : <Loader />
 }

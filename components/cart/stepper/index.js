@@ -201,7 +201,7 @@ const Final = () => {
 
         if (state.payment === 'Cash on Delivery') {
             try {
-                const response = await axios.post(`/api/payments/register-cash`)
+                const response = await axios.post(`/api/checkout/register-cash`, { state, final_products })
 
                 if (response.status === 200 && response.data.status === 200) {
                     router.replace('/cart/success')

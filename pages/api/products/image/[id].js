@@ -1,8 +1,6 @@
 import executeQuery from "../../../../lib/db";
 
 export default async (req, res) => {
-  console.log(req.query.id);
-
   const { id } = req.query;
 
   try {

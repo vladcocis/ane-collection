@@ -5,7 +5,7 @@ import { generateInvoice } from '../../../components/checkout/GenerateInvoice'
 import withSession from '../../../lib/session'
 import { sendMail } from '../../../components/checkout/Mailing'
 
-const stripe = require('stripe')('sk_test_51HLFOaDfku0lGfVqZpmhcnUhCzlZC4QhE6N3CtlQD9FHQal15vEypkgC0nD5uVco14jwTfMcFxiE1zWLRiwP5ctx003d05yPwf');
+const stripe = require('stripe')('SECRET_API_KEY');
 
 export default withSession(async (req, res) => {
     if (req.method === 'GET') {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useContext } from 'react'
 import Loader from '../Loader'
 
 let initialState = []

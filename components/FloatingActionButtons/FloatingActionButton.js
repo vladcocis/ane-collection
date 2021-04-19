@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import Button from '@material-ui/core/Button'
 import Drawer from '@material-ui/core/Drawer'
 import Link from 'next/link'
-import { CartContext } from '../cart/CartProvider'
+import { CartContext, validateProductsInState } from '../cart/CartProvider'
 import { getProductsTotalCount } from '../cart/CartProvider'
 import CloseIcon from '@material-ui/icons/Close'
 import { Typography } from '@material-ui/core'
@@ -126,21 +126,30 @@ export default function FloatingActionButtons() {
 	}
 
 	const showProducts = () => {
-		return _.map(items, ({ id, amount }) => {
-			if (id && amount) {
-				const product = findProduct(id)
+		try {
+			if (totalCount) {
+				return _.map(items, ({ id, amount }) => {
+					if (id && amount) {
+						const product = findProduct(id)
 
-				return (
-					<ListItem key={id}>
-						<Button onClick={(e) => handleDecrement(e, id)} className={classes.amountButton} variant="contained">-</Button>
-						<ListItemText primary={`${product.product_name} x ${amount}`} secondary={`${product.product_price} Lei`} />
-						<Button onClick={(e) => handleIncrement(e, id)} className={classes.amountButton} variant="contained">+</Button>
+						return (
+							<ListItem key={id}>
+								<Button onClick={(e) => handleDecrement(e, id)} className={classes.amountButton} variant="contained">-</Button>
+								<ListItemText primary={`${product.product_name} x ${amount}`} secondary={`${product.product_price} Lei`} />
+								<Button onClick={(e) => handleIncrement(e, id)} className={classes.amountButton} variant="contained">+</Button>
 
-						<Button onClick={(e) => handleRemove(e, id)} variant="contained">Remove</Button>
-					</ListItem>
-				)
+								<Button onClick={(e) => handleRemove(e, id)} variant="contained">Remove</Button>
+							</ListItem>
+						)
+					}
+				})
 			}
-		})
+		} catch (error) {
+			dispatch({ type: 'RESET_CART' })
+			router.reload()
+
+			return null
+		}
 	}
 
 	if (!totalCount) {

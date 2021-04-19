@@ -1,11 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Grid, Button, Typography, Container, Paper } from "@material-ui/core";
 
 import MobileStepper from "@material-ui/core/MobileStepper";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+import { CartContext } from '../../components/cart/CartProvider'
 
 const productStyle = makeStyles({
   root: {
@@ -50,7 +51,7 @@ const productStyle = makeStyles({
 
 var maxSteps = 0;
 const Product_info = ({ data_product }) => {
-
+  const { dispatch } = useContext(CartContext)
   const [images, setImages] = React.useState({});
 
   images ?? <h2>Loading...</h2>;
@@ -84,7 +85,12 @@ const Product_info = ({ data_product }) => {
 
 
   _.map(images, (p) => { img.push(p.img); })
-  
+
+  const handleClick = (e, productId) => {
+    e.preventDefault()
+
+    return dispatch({ type: 'ADD_ITEM', payload: { productId } })
+  }
 
   maxSteps = img.length
   return (
@@ -155,10 +161,10 @@ const Product_info = ({ data_product }) => {
           </Typography>
 
           <Typography variant="subtitle2" className={pclasses.price}>
-            {data_product.product_price} $
+            {data_product.product_price} RON
           </Typography>
 
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={(e) => handleClick(e, data_product.id)}>
             Buy
           </Button>
 

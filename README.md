@@ -78,7 +78,7 @@ export const sendMail = async (to, subject, text, attachment) => {
         port: '465',
         auth: {
             user: 'username',
-            pass: 'username'
+            pass: 'password'
         }
     })
 

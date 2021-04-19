@@ -99,3 +99,17 @@ export const sendMail = async (to, subject, text, attachment) => {
     }
 }
 ```
+
+The Stripe Payment must be configured as such:
+
+Inside `/components/cart/stepper/index.js`:
+
+```code
+const stripePromise = loadStripe('PUBLIC_KEY')
+```
+
+Inside `/api/checkout/create-session.js`:
+
+```code
+const stripe = require('stripe')('SECRET_API_KEY')
+```

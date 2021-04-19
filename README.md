@@ -37,3 +37,28 @@ Edit the following line inside `pages/api/admin/image-upload.js`:
 const newPath = '/your/system/path/public/uploads/' + fileName
 ```
 
+The database configuration is present inside `lib/db.js`, where one must fill in the following fields:
+
+```code
+config: {
+        host: 'yourHost.com',
+        port: 'port', //int
+        database: 'database_name',
+        user: 'username',
+        password: 'password'
+    }
+```
+
+The mailing system configuration is present inside `components/checkout/Mailing.js`, where one must fill in the following info:
+
+```code
+const info = await transporter.sendMail({
+            from: 'your@email.com',
+            to: 'to@someone.com',
+            subject: 'Subject',
+            text: 'Some lorem Ipsum!',
+            attachments: [{
+                path: `/local/path/to/attachments/${attachment}`
+            }]
+        })
+```

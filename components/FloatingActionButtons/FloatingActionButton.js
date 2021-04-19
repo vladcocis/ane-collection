@@ -18,6 +18,23 @@ import Loader from '../../components/Loader'
 import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		flexDirection: 'column',
+		zIndex: 1,
+		position: 'fixed',
+		top: '60%',
+		padding: 10,
+		right: 1,
+	},
+	fa_icon: {
+		padding: 3
+	},
+	icon_container: {
+		fontSize: '2rem',
+		color: '#fff',
+		marginTop: 8
+	},
 	fabColor2: {
 		position: 'flex',
 		backgroundColor: '#f1d4ff',
@@ -43,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	cartCount: {
 		position: 'absolute',
-		top: -8,
+		top: 0,
 		right: 10,
 		backgroundColor: '#000',
 		color: '#fff',
@@ -157,9 +174,9 @@ export default function FloatingActionButtons() {
 	}
 
 	return (
-		<div className='root'>
-			{(router.pathname !== '/cart' && router.pathname !== '/cart/checkout') &&
-				<div className='icon__container'>
+		<div className={classes.root}>
+			{/*(router.pathname !== '/cart' && router.pathname !== '/cart/checkout') &&*/
+				<div className={classes.icon_container}>
 					<span className={classes.cartCount}>{totalCount}</span>
 
 					<Button onClick={handleDrawerOpen} className={classes.shoppingCartButton}>
@@ -167,12 +184,12 @@ export default function FloatingActionButtons() {
 					</Button>
 				</div>
 			}
-			<div className='icon__container'>
+			<div className={classes.icon_container}>
 				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
 					<FacebookIcon />
 				</Fab>
 			</div>
-			<div className='icon__container'>
+			<div className={classes.icon_container}>
 				<Fab className={classes.fabColor2} aria-label="instagram" href="https://www.instagram.com/roxanaaapop/" target="_blank" rel='noopener noreferrer'>
 					<InstagramIcon />
 				</Fab>

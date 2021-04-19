@@ -23,26 +23,26 @@ function Footer() {
               href='/'
             >
               <a>
-              <FacebookIcon/>
+                <FacebookIcon />
               </a>
-              
+
             </Link>
             <Link
               className='social-icon-link instagram'
               href='/'
-              
+
             >
               <a>
-              <InstagramIcon/>
+                <InstagramIcon />
               </a>
-              
+
             </Link>
             <Link
               className='social-icon-link twitter'
               href='/'
             >
               <a>
-              <TwitterIcon/>
+                <TwitterIcon />
               </a>
             </Link>
             <Link
@@ -50,12 +50,16 @@ function Footer() {
               href='/'
             >
               <a>
-              <LinkedInIcon/>
+                <LinkedInIcon />
               </a>
             </Link>
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+       
+      `}</style>
     </div>
   );
 }

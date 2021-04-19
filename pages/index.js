@@ -155,10 +155,6 @@ const items = [
 	}
 ]
 
-
-const handleClick = (e, id) => {
-
-}
 const Item = (props) => {
 	const classes = useStyles()
 
@@ -186,14 +182,14 @@ const Item = (props) => {
 			const item = props.item.Items[i];
 			console.log(item.link)
 			const media = (
-				
+
 				<Grid item xs={12 / totalItems} key={item.Name}>
 					<Link href={item.link}>
 						<CardMedia
 							className={classes.carouselItemMedia}
 							image={item.Image}
 							title={item.Name}
-							
+
 						>
 							<Typography className={classes.mediaCaption}>
 								{item.Name}
@@ -232,15 +228,15 @@ const Item = (props) => {
 
 			const media = (
 				<Grid item xs={6} key={item.Name}>
-							<CardMedia
-								className={classes.carouselItemMedia}
-								image={item.Image}
-								title={item.Name}
-							>
-								<Typography className={classes.mediaCaption}>
-									{item.Name}
-								</Typography>
-							</CardMedia>	
+					<CardMedia
+						className={classes.carouselItemMedia}
+						image={item.Image}
+						title={item.Name}
+					>
+						<Typography className={classes.mediaCaption}>
+							{item.Name}
+						</Typography>
+					</CardMedia>
 				</Grid>
 			)
 
@@ -271,14 +267,9 @@ const Home = () => {
 					return <Item key={index} item={it} />
 				})}
 			</Carousel>
-			<HomeDetails/>
+			<HomeDetails />
 			<CollectionDetails />
-			<Typography align='center' gutterBottom variant="h4" component="h2">
-            Learn what our customers think about us
-          </Typography>
-		  <Divider />
-			<Testimonials />
-{/*
+			{/*
 			<Grid container component="main">
 				<Grid className={classes.imageGrid} item xs={6}></Grid>
 				

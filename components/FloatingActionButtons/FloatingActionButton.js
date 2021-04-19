@@ -185,12 +185,12 @@ export default function FloatingActionButtons() {
 				</div>
 			}
 			<div className={classes.icon_container}>
-				<Fab className={classes.fabColor2} aria-label="facebook" href="https://www.facebook.com/RoxxanaPop" target="_blank" rel='noopener noreferrer'>
+				<Fab className={classes.fabColor2} aria-label="facebook" href="#" target="_blank" rel='noopener noreferrer'>
 					<FacebookIcon />
 				</Fab>
 			</div>
 			<div className={classes.icon_container}>
-				<Fab className={classes.fabColor2} aria-label="instagram" href="https://www.instagram.com/roxanaaapop/" target="_blank" rel='noopener noreferrer'>
+				<Fab className={classes.fabColor2} aria-label="instagram" href="https://www.instagram.com/ane.collections/" target="_blank" rel='noopener noreferrer'>
 					<InstagramIcon />
 				</Fab>
 			</div>

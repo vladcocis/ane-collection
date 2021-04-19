@@ -29,7 +29,7 @@ function Footer() {
             </Link>
             <Link
               className='social-icon-link instagram'
-              href='/'
+              href='https://www.instagram.com/ane.collections/'
 
             >
               <a>
@@ -37,29 +37,9 @@ function Footer() {
               </a>
 
             </Link>
-            <Link
-              className='social-icon-link twitter'
-              href='/'
-            >
-              <a>
-                <TwitterIcon />
-              </a>
-            </Link>
-            <Link
-              className='social-icon-link twitter'
-              href='/'
-            >
-              <a>
-                <LinkedInIcon />
-              </a>
-            </Link>
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-       
-      `}</style>
     </div>
   );
 }

@@ -12,6 +12,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import useUser from '../../lib/useUser';
 import fetchJson from "../../lib/fetchJson";
 
+/*
+* SignIn Component that implements the sign in functionality of the system through the use of a sign in form
+* If user is authenticated, this page will automatically redirect them to the /profile page.
+* If a user wants to create an account instead, a link to the /sign-up component is present under the sign in button.
+* Implements the log in functionality though the POST /api/auth/login endpoint that accepts a body that contains a username and a password.
+* Both fields are required.
+* Implements error handling for incorrect username/password and displays approapriate message.
+*/
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '84vh',

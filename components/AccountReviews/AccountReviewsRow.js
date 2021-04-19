@@ -3,6 +3,13 @@ import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import ReviewImage from "./ReviewImage";
 
+/*
+* AccountReviewsRow Component that displayes the details of a review by user.
+* Accepts props from the review_history Component within pages.
+* On rendering, fetches one image associated with the product that the review is associated with.
+* Maps the details of the image to a new Component: ReviewImage that will handle the display of the review image.
+*/
+
 const useStyles = makeStyles(() => ({
     container: {
         minHeight: '350px',

@@ -12,6 +12,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+/*
+* payment_history page that fetches the payment details of a user by userId.
+* Fetched the id of the user using the useUser library.
+* Display details in the form of a table.
+* Table contains a caption to make it accessible.
+* If no data is available (user does not have any past payments), a message is displayed appropriately instead of the payment history table.
+*/
+
 const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 700,

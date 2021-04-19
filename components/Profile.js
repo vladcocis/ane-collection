@@ -5,6 +5,11 @@ import fetchJson from "../lib/fetchJson"
 import Button from '@material-ui/core/Button'
 import { useRouter } from 'next/router'
 
+
+/*
+* Profile component with buttons to all sub-pages/actions that a user can access.
+* If user is not authenticated, they will be redirected to the sign in form.
+*/
 const useStyles = makeStyles((theme) => ({
     root: {
 		height: 700,

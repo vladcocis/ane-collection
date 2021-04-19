@@ -4,6 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import useUser from "../../lib/useUser";
 import axios from "axios";
 
+/*
+* AccountAddress Component that fetched all addresses of a user.
+* Uses the useUser library to fetch data by userId.
+* Fetches data through the /api/address/{id} endpoint.
+* Maps the data to a new EditAccountAddress Component that will display the data.
+* Handles absence of data: if user does not have any addresses, a message will be displayed instead of the EditAccountAddress Component.
+*/
 const edit_account =() =>{
     const [data,setData] = useState([]);
     const [isLoading, setIsLoading] = useState (false);
@@ -43,7 +50,6 @@ const edit_account =() =>{
     }
 
     return(
-        <React.Fragment>
             <div >
             <Typography component="h1" variant="h4" align='center'>
             You can edit your addresses details here
@@ -52,7 +58,6 @@ const edit_account =() =>{
    
             
             </div>
-    </React.Fragment>
     )
 }
 

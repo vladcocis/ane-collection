@@ -6,6 +6,12 @@ import EditAccountDetails from "../components/AccountDetails/EditAccountDetails"
 import AccountAddress from "../components/AccountDetails/AccountAddress";
 import { makeStyles } from '@material-ui/core/styles';
 
+/*
+* edit_account page that fetched the account datails (name and email) of a user using the useUser library.
+* Maps details to the EditAccountDetails Component that displayed them appropriately.
+* Calls the AcountAddress Component to be rendered within the edit_account page.
+*/
+
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',

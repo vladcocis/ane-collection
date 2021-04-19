@@ -8,6 +8,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import axios from 'axios'
 
+/*
+* EditAccountAddress Component that enables the user to edit their already existing addresses.
+* Accepts props from the AccountAddress Component.
+* Implements form vlidation on all fields.
+* Updates database through the PUT /api/address/edit endpoint that accepts a body with address details.
+* Implements 'edit' and 'save' buttons accordingly.
+*/
+
 const useStyles = makeStyles((theme) => ({
     root: {
 		display: 'flex',

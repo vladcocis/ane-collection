@@ -11,6 +11,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 
+/*
+* SignUp Component that implements the sign up functionality of the system through the use of a sign up form
+* If a user wants to sign in instead, a link to the SignIn component is present under the sign up button.
+* Implements the sign up functionality though the POST /api/auth/signup endpoint that accepts a body that contains a firstName, lastName, username, email, password.
+* Form validation present for all fields.
+* Implements error handling if the username or email are taken by another user and displays approapriate message.
+* Sign up button is disabled if any of the fields are not valid or if they are empty.
+*/
+
 const useStyles = makeStyles((theme) => ({
 	paper: {
 		height: 700,

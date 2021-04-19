@@ -10,6 +10,14 @@ import SaveIcon from '@material-ui/icons/Save';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 
+/*
+* EditAccountDetails Component that enables the user to edit name and email.
+* Accepts props from the edit_account Component within pages.
+* Implements form vlidation on all fields.
+* Updates database through the PUT /api/user/edit endpoint that accepts a body with user details.
+* Implements 'edit' and 'save' buttons accordingly.
+*/
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',

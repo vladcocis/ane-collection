@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import EditAccountAddress from "./EditAccountAddress";
 import Typography from '@material-ui/core/Typography';
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 import axios from "axios";
 
 const edit_account =() =>{
@@ -22,7 +22,7 @@ const edit_account =() =>{
             if (response.status === 200) {
               setData(response.data.payload);
               setIsLoading(true)
-              console.log(response.data.payload)
+              //console.log(response.data.payload)
             }
           }
           fetchAccountAddress()

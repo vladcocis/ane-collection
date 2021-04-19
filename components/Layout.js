@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import FloatingActionButton from './FloatingActionButtons/FloatingActionButton'
-import Footer from '../components/Footer'
+import Footer from './Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
 import { useRouter } from 'next/router'
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import AccountReviewsRow from "../components/AccountReviewsRow";
+import AccountReviewsRow from "../components/AccountReviews/AccountReviewsRow";
 import useUser from "../lib/useUser";
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,7 +39,7 @@ const edit_account =() =>{
             if (response.status === 200) {
               setData(response.data.payload);
               setIsLoading(true)
-              console.log(response.data.payload.length)
+              //console.log(response.data.payload.length)
             }
           }
           fetchAccountReviews()

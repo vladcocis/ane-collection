@@ -7,7 +7,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(8),
       display: 'flex',
       justifyContent:'center',
-      flexWrap: 'wrap'
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      '@media(max-width: 1460px)' : {
+        flexDirection: 'column',
+          },
     },
   }));
 
@@ -16,7 +20,7 @@ const Testimonials =() =>{
 
     return(
         <Grid container className={classes.container}>
-            <Grid xs={12} sm={3}>
+            <Grid item={true} xs={12} sm={3}>
                     <TestimonialCard
                             name={"Heather Smith"}
                             image={""}
@@ -24,7 +28,7 @@ const Testimonials =() =>{
                             project={"Anne Collections"}
                     />
          </Grid>
-         <Grid xs={12} sm={3}>
+         <Grid item={true} xs={12} sm={3}>
          <TestimonialCard
                 name={"Lisa Williams"}
                 image={""}
@@ -32,7 +36,7 @@ const Testimonials =() =>{
                 project={"Anne Collections"}
          />
          </Grid>
-         <Grid xs={12} sm={3}>
+         <Grid item={true} xs={12} sm={3}>
          <TestimonialCard
                 name={"Jennifer Evans"}
                 image={""}

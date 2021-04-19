@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import Typography from '@material-ui/core/Typography';
 import useUser from "../lib/useUser";
 import axios from "axios";
-import EditAccountDetails from "../components/EditAccountDetails";
-import AccountAddress from "../components/AccountAddress";
+import EditAccountDetails from "../components/AccountDetails/EditAccountDetails";
+import AccountAddress from "../components/AccountDetails/AccountAddress";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({

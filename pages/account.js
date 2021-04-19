@@ -1,4 +1,4 @@
-import SignInSide from "../components/SignInSide";
+import SignInSide from "../components/Authentication/SignInSide";
 
 const account =() =>{
     return(

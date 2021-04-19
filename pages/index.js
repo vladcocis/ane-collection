@@ -6,9 +6,9 @@ import _ from 'lodash'
 import React from 'react'
 import { useRouter } from 'next/router';
 import Link from "next/link";
-import HomeDetails from '../components/HomeDetails'
-import CollectionDetails from '../components/CollectionDetails'
-import Testimonials from '../components/Testimonials'
+import HomeDetails from '../components/Homepage/HomeDetails'
+import CollectionDetails from '../components/Homepage/CollectionDetails'
+import Testimonials from '../components/Homepage/Testimonials'
 import Divider from '@material-ui/core/Divider';
 
 import {

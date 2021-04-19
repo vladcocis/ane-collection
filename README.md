@@ -40,19 +40,50 @@ const newPath = '/your/system/path/public/uploads/' + fileName
 The database configuration is present inside `lib/db.js`, a file which you must create as such:
 
 ```code
-config: {
+
+import mysql from 'serverless-mysql'
+
+const db = mysql({
+    config: {
         host: 'yourHost.com',
         port: 'port', //int
         database: 'database_name',
         user: 'username',
         password: 'password'
     }
+})
+
+export default async function executeQuery({ query, values }) {
+    try {
+        const results = await db.query(query, values)
+        await db.end()
+
+        return results
+    } catch (error) {
+        return { error }
+    }
+}
 ```
 
 The mailing system configuration is present inside `components/checkout/Mailing.js`, a file which you must create as such:
 
 ```code
-const info = await transporter.sendMail({
+
+const nodemailer = require('nodemailer')
+
+export const sendMail = async (to, subject, text, attachment) => {
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        host: 'smtp.gmail.com',
+        port: '465',
+        auth: {
+            user: 'username',
+            pass: 'username'
+        }
+    })
+
+    try {
+        const info = await transporter.sendMail({
             from: 'your@email.com',
             to: 'to@someone.com',
             subject: 'Subject',
@@ -61,4 +92,10 @@ const info = await transporter.sendMail({
                 path: `/local/path/to/attachments/${attachment}`
             }]
         })
+
+        console.log(`Message sent: ${info.messageId}`)
+    } catch (err) {
+        console.error(err)
+    }
+}
 ```

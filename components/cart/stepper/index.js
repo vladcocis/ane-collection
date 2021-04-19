@@ -23,7 +23,7 @@ import Loader from '../../Loader'
 import _ from 'lodash'
 
 // public test key as per Andrei Moldovan's Stripe Dashboard account.
-const stripePromise = loadStripe('pk_test_51HLFOaDfku0lGfVqzVhVcJBjy4PfaBbbgxGf1CxQrwfpU131wHXSkwOkpy5wn8C3WdByDj0KO63Ff24mpQuvbnfo00sPZvmteD')
+const stripePromise = loadStripe('PUBLIC_KEY')
 
 const useStyles = makeStyles((theme) => ({
     main: {

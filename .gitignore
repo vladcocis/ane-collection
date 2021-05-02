@@ -36,8 +36,8 @@ package-lock.json
 package-lock.json
 
 # image upload file
-/pages/api/admin/image-upload.js
+pages/api/admin/image-upload.js
 
 #db and mailing
-/components/checkout/Mailing
-/lib/db
+components/checkout/Mailing
+lib/db

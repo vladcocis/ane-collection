@@ -23,6 +23,7 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import CloseIcon from '@material-ui/icons/Close'
 import Divider from '@material-ui/core/Divider'
+import EuroIcon from '@material-ui/icons/Euro'
 
 const navLinks = [
 	{ label: 'Home', url: '/', icon: <HomeIcon style={{ fill: '#000' }} /> },
@@ -31,6 +32,7 @@ const navLinks = [
 	{ label: 'Angel Collection', url: '/products', icon: <BusinessCenterIcon style={{ fill: '#000' }} /> },
 	{ label: 'Contact', url: '/contact', icon: <PhoneIcon style={{ fill: '#000' }} /> },
 	{ label: 'Admin', url: '/admin', icon: <SettingsApplicationsIcon style={{ fill: '#000' }} />, requiresAdmin: true },
+	{ label: 'Orders', url: '/orders', icon: <EuroIcon style={{ fill: '#000' }} />, requiresAdmin: true },
 	{ label: 'Account', url: '/account', icon: <AccountCircleIcon style={{ fill: '#000' }} /> },
 ]
 

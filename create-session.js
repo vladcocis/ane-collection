@@ -47,12 +47,12 @@ export default withSession(async (req, res) => {
 
         const insert_response = await executeQuery({
             query: `INSERT INTO user_orders (id, client_name, email, address1, address2, city, county, phone, payment_method, order_status, date_time, user_id)
-                VALUES ('${entryId}', '${name}', '${email}', '${address1}, ${zip ?? ''}', '${address2 ?? 'N/A'}', '${city}', '${county}', '${phone}', 'CARD', '0', '${dateTime}', '${user ? user.id : '-1'}')`
+                VALUES ('${entryId}', '${name}', '${email}', '${address1}, ${zip ?? ''}', '${address2 ?? 'N/A'}', '${city}', '${county}', '${phone}', 'CARD', '0', '${dateTime}', '${user.id ?? '-1'}')`
         })
 
         const insert_payment_response = await executeQuery({
             query: `INSERT INTO user_payments (id, user_id, transaction_date, payment_total, payment_method, invoice)
-                VALUES (null, '${user ? user.id : '-1'}', '${dateTime}', '${total}', 'CASH', '${invoiceName}')`
+                VALUES (null, '${user.id ?? '-1'}', '${dateTime}', '${total}', 'CASH', '${invoiceName}')`
         })
 
         if (insert_payment_response.error) {
